@@ -57,3 +57,7 @@ I recommend using `asdf` to manage ruby and nodejs versions.
 - Docker setup
 - Circleci config and instructions
 - Add scripts for linters / CI
+
+## License
+
+MIT
