@@ -106,17 +106,17 @@ def setup_asdf
 end
 
 def post_install_requirements
-  # rspec
-  run 'bundle exec rails generate rspec:install'
-
-  # webpacker
-  run 'bundle exec rails webpacker:install'
-
   # create db
   run 'bundle exec rails db:create'
 
   # db migrate
   run 'bundle exec rails db:migrate'
+
+  # webpacker
+  run 'bundle exec rails webpacker:install'
+
+  # rspec
+  run 'bundle exec rails generate rspec:install'
 end
 
 def check_ruby_version; end
