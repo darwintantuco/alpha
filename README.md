@@ -29,14 +29,14 @@
 - [ ] Docker Setup
 - [ ] circeci config
 - [ ] react setup
-- [ ] rspec examples
+- [x] rspec examples
 - [ ] js test examples
 
 ## Testing
 
-- [ ] rspec-rails
+- [x] rspec-rails
 - [ ] factory_bot_rails
-- [ ] capybara
+- [x] capybara
 - [ ] database_cleaner
 - [ ] faker
 - [ ] selenium-webdriver

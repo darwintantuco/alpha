@@ -28,6 +28,7 @@ end
 def add_testing_gems
   gem_group :development, :test do
     gem 'factory_bot_rails'
+    gem 'rails-controller-testing'
     gem 'rspec-rails'
   end
 
@@ -81,7 +82,7 @@ def setup_homepage_template
   copy_file 'app/views/layouts/application.html.erb', 'app/views/layouts/application.html.erb'
 end
 
-def setup_initial_folder_structure
+def setup_assets_folder_structure
   remove_file 'app/javascript/packs/application.js'
 
   # css
@@ -105,6 +106,9 @@ def setup_asdf
 end
 
 def post_install_requirements
+  # rspec
+  run 'bundle exec rails generate rspec:install'
+
   # webpacker
   run 'bundle exec rails webpacker:install'
 
@@ -113,6 +117,17 @@ def post_install_requirements
 end
 
 def check_ruby_version; end
+
+def add_rspec_examples
+  # models
+  copy_file 'spec/models/.keep', 'spec/models/.keep'
+
+  # controllers
+  copy_file 'spec/controllers/home_controller_spec.rb', 'spec/controllers/home_controller_spec.rb'
+
+  # features
+  copy_file 'spec/features/visitor_sees_homepage_spec.rb', 'spec/features/visitor_sees_homepage_spec.rb'
+end
 
 check_ruby_version
 add_template_repository_to_source_path
@@ -128,6 +143,7 @@ copy_linter_files
 
 after_bundle do
   post_install_requirements
-  setup_initial_folder_structure
+  setup_assets_folder_structure
+  add_rspec_examples
   initial_commit
 end
