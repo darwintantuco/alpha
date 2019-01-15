@@ -1,8 +1,24 @@
 # alpha
 
-## WORK IN PROGRESS
-
 ## Getting Started
+
+### Requirements
+
+- ruby 2.6.0
+- nodejs 10.4.0
+- rails 5.2
+- yarn
+
+I recommend using `asdf` to manage ruby and nodejs versions.
+
+### Usage
+
+```
+  rails new appname
+    -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+```
+
+### Recommended Usage
 
 ```
   rails new appname --database=postgresql --skip-test \
@@ -11,39 +27,31 @@
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
-## Defaults
+## Features
 
-- [x] Use postgresql
-- [x] Skip test files
-- [x] Skip sprockets files
-- [x] Skip turbolinks
-- [x] Don't use CoffeeScript
-- [x] Skip JavaScript files
-- [x] Preconfigured with webpack
-- [ ] Use `.haml`
+- Initial folder structure if `--webpack` is enabled
+- Working rspec examples
+- Stylelint config
+  - stylelint
+  - stylelint-config-standard
+  - stylelint-rscss
+  - stylelint-8-point-grid
 
-## Templates
+## TODO
 
-- [ ] homepage
-- [x] js/css/images folder structure
-- [ ] Docker Setup
-- [ ] circeci config
-- [ ] react setup
-- [x] rspec examples
-- [ ] js test examples
-
-## Testing
-
-- [x] rspec-rails
-- [ ] factory_bot_rails
-- [x] capybara
-- [ ] database_cleaner
-- [ ] faker
-- [ ] selenium-webdriver
-
-## Linters/Fixers
-
-- [ ] Rubocop
-- [x] Stylelint
-- [ ] Eslint
-- [ ] Prettier
+- Finish rspec gems setup
+  - factory_bot_rails
+  - database_cleaner
+  - faker
+  - selenium-webdriver
+- Finish linters
+  - Rubocop
+  - Eslint
+  - Prettier
+- Use `.haml`
+- Improve homepage style
+- Initial react setup
+- Add sample js tests
+- Docker setup
+- Circleci config and instructions
+- Add scripts for linters / CI
