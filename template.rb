@@ -104,7 +104,7 @@ def webpack_folder_structure
 
   # render sample icon
   inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
-    "\n  <%= image_tag asset_pack_path("images/rails-logo.svg"), class: "logo" %> \n"
+    "\n  <%= image_tag asset_pack_path('images/rails-logo.svg'), class: 'logo' %> \n"
   end
 end
 
