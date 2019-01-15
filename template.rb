@@ -75,7 +75,8 @@ def add_linter_packages
     stylelint-config-standard \
     stylelint-rscss \
     stylelint-8-point-grid \
-    prettier-eslint-cli'
+    prettier-eslint-cli \
+    npm-run-all'
 end
 
 def copy_linter_files

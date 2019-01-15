@@ -4,7 +4,8 @@
   "scripts": {
     "lint:ruby": "rubocop --require rubocop-rspec",
     "lint:css": "stylelint \"./app/**/*.scss\"",
+    "prettier:check": "prettier-eslint --list-different \"./app/**/*.scss\" \"./app/**/*.{js,jsx}\"",
     "prettier:fix": "prettier-eslint --write \"./app/**/*.scss\" \"./app/**/*.{js,jsx}\"",
-    "prettier:check": "prettier-eslint --list-different \"./app/**/*.scss\" \"./app/**/*.{js,jsx}\""
+    "ci": "run-s lint:ruby lint:css prettier:check"
   }
 }
