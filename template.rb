@@ -63,8 +63,8 @@ end
 
 def setup_homepage_template
   route 'root to: home#index'
-  copy 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
-  copy 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+  copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
+  copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 end
 
 add_template_repository_to_source_path
