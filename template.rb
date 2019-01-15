@@ -99,7 +99,6 @@ def webpack_folder_structure
 
   # add pack tags in application layout
   inject_into_file 'app/views/layouts/application.html.erb', after: "<%= stylesheet_link_tag    'application', media: 'all' %>" do
-    "\n    config.logger = Logger.new(config.paths.log.first, 50, 1048576)\n"
     "\n    <%= javascript_pack_tag 'application' %>\n    <%= stylesheet_pack_tag 'application' %>\n"
   end
 end
