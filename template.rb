@@ -148,11 +148,14 @@ def initial_commit
   git commit: "-a -m 'Initial commit'"
 end
 
-def initial_lint_fixes
-  # generate .rubocop_todo.yml
+def generate_rubocop_todo
   run 'rubocop --auto-gen-config'
-  run 'yarn run prettier:fix'
+  git add: '.'
+  git commit: "-a -m 'Generate .rubocop_todo.yml'"
+end
 
+def initial_lint_fixes
+  run 'yarn run prettier:fix'
   git add: '.'
   git commit: "-a -m 'Initial lint fixes'"
 end
@@ -174,5 +177,6 @@ after_bundle do
   webpack_folder_structure if options['webpack']
   add_rspec_examples
   initial_commit
+  generate_rubocop_todo
   initial_lint_fixes
 end
