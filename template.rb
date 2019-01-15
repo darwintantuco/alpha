@@ -74,9 +74,9 @@ end
 def check_ruby_version; end
 
 check_ruby_version
+add_template_repository_to_source_path
 setup_asdf
 
-add_template_repository_to_source_path
 add_testing_gems
 setup_homepage_template
 
