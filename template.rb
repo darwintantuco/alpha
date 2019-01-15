@@ -36,6 +36,8 @@ def add_essential_gems
     gem 'factory_bot_rails'
     gem 'rails-controller-testing'
     gem 'rspec-rails'
+    gem "rubocop", require: false
+    gem 'rubocop-rspec'
   end
 
   gem_group :test do
@@ -43,10 +45,6 @@ def add_essential_gems
     gem 'database_cleaner'
     gem 'faker'
     gem 'selenium-webdriver'
-  end
-
-  gem_group :development do
-    gem "rubocop", require: false
   end
 end
 
