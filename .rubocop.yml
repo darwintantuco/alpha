@@ -1,0 +1,33 @@
+inherit_from: .rubocop_todo.yml
+require: rubocop-rspec
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/BlockAlignment:
+  Enabled: false
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'bin/*'
+  TargetRubyVersion: 2.6.0
