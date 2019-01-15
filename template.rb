@@ -69,6 +69,9 @@ def setup_homepage_template
   route "root to: 'home#index'"
   copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+
+  remove_file 'app/views/layouts/application.html.erb'
+  copy_file 'app/views/layouts/application.html.erb', 'app/views/layouts/application.html.erb'
 end
 
 def setup_initial_folder_structure
@@ -76,6 +79,7 @@ def setup_initial_folder_structure
 
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
+  copy_file 'app/javascript/css/components/home-page.scss', 'app/javascript/css/compnents/home-page.scss'
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
   copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
