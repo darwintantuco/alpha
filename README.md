@@ -5,7 +5,7 @@
 ## Getting Started
 
 ```
-  rails new app-name --database=postgresql --skip-test \
+  rails new appname --database=postgresql --skip-test \
     --skip-sprockets --skip-turbolinks --skip-coffee \
     --skip-javascript --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb

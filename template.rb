@@ -114,6 +114,9 @@ def post_install_requirements
 
   # create db
   run 'bundle exec rails db:create'
+
+  # db migrate
+  run 'bundle exec rails db:migrate'
 end
 
 def check_ruby_version; end
