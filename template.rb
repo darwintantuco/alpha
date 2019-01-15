@@ -99,6 +99,9 @@ def post_install_requirements
   run 'bundle exec spring stop'
   run 'bundle exec spring binstub --all'
   run 'bundle exec rails generate rspec:install'
+
+  # generate .rubocop_todo.yml
+  run 'rubocop --auto-gen-config'
 end
 
 def webpack_folder_structure

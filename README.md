@@ -38,13 +38,10 @@ rails new appname --database=postgresql --skip-test \
 - Working rspec examples
 - Essential packages
   - sanitize.css
-- Stylelint
-  - stylelint
-  - stylelint-config-standard
-  - stylelint-rscss
-  - stylelint-8-point-grid
-- Prettier
-  - prettier-eslint-cli
+- Linters
+  - Rubocop
+  - Stylelint
+  - Prettier
 
 ## TODO
 
@@ -54,7 +51,6 @@ rails new appname --database=postgresql --skip-test \
   - faker
   - selenium-webdriver
 - Finish linters
-  - Rubocop
   - Eslint
 - Use `.haml`
 - Improve homepage style
