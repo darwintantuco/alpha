@@ -79,7 +79,7 @@ def setup_initial_folder_structure
 
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
-  copy_file 'app/javascript/css/components/home-page.scss', 'app/javascript/css/compnents/home-page.scss'
+  copy_file 'app/javascript/css/components/home-page.scss', 'app/javascript/css/components/home-page.scss'
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
   copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
