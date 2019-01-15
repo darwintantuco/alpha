@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'shellwords'
-require 'pry'
 
 # Copied from https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
@@ -123,9 +122,7 @@ def post_install_requirements
   run 'bundle exec rails generate rspec:install'
 end
 
-def check_ruby_version
-  binding.pry
-end
+def check_ruby_version; end
 
 def add_rspec_examples
   # models
@@ -152,7 +149,7 @@ copy_linter_files
 
 after_bundle do
   post_install_requirements
-  webpack_folder_structure
+  webpack_folder_structure if options['webpack']
   add_rspec_examples
   initial_commit
 end
