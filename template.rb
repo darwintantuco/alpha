@@ -71,6 +71,11 @@ def setup_asdf
   copy_file '.tool-versions', '.tool-versions'
 end
 
+def post_install_requirements
+  # webpacker
+  run 'bundle exec rails webpacker:install'
+end
+
 def check_ruby_version; end
 
 check_ruby_version
@@ -85,5 +90,6 @@ add_yarn_linters
 copy_linter_files
 
 after_bundle do
+  post_install_requirements
   initial_commit
 end
