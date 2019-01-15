@@ -116,6 +116,9 @@ def post_install_requirements
   run 'bundle exec rails webpacker:install'
 
   # rspec
+  # attempt to fix intermittent failures in rspec generator
+  run 'bundle exec spring stop'
+  run 'bundle exec spring binstub --all'
   run 'bundle exec rails generate rspec:install'
 end
 
