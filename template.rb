@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'shellwords'
+require 'pry'
 
 # Copied from https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
@@ -42,7 +43,7 @@ end
 
 def setup_package_json
   remove_file 'package.json'
-  template 'package.json.erb', 'package.json'
+  template 'package.json.tt', 'package.json'
 end
 
 def add_essential_packages
@@ -79,10 +80,10 @@ def setup_homepage_template
 
   # layout
   remove_file 'app/views/layouts/application.html.erb'
-  copy_file 'app/views/layouts/application.html.erb', 'app/views/layouts/application.html.erb'
+  copy_file 'app/views/layouts/application.html.erb.tt', 'app/views/layouts/application.html.erb'
 end
 
-def setup_assets_folder_structure
+def webpack_folder_structure
   remove_file 'app/javascript/packs/application.js'
 
   # css
@@ -122,7 +123,9 @@ def post_install_requirements
   run 'bundle exec rails generate rspec:install'
 end
 
-def check_ruby_version; end
+def check_ruby_version
+  binding.pry
+end
 
 def add_rspec_examples
   # models
@@ -149,7 +152,7 @@ copy_linter_files
 
 after_bundle do
   post_install_requirements
-  setup_assets_folder_structure
+  webpack_folder_structure
   add_rspec_examples
   initial_commit
 end
