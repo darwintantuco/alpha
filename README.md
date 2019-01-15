@@ -63,6 +63,7 @@ rails new appname --database=postgresql --skip-test \
 - Docker setup
 - Circleci config and instructions
 - Add scripts for linters / CI
+- One source for specifying versions (ruby/nodejs/etc)
 
 ## License
 

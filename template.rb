@@ -1,6 +1,8 @@
 require 'fileutils'
 require 'shellwords'
 
+def check_ruby_version; end
+
 # Copied from https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
 # copy_file and template resolve against our source files. If this file was
@@ -25,7 +27,11 @@ def add_template_repository_to_source_path
   end
 end
 
-def add_testing_gems
+def setup_asdf
+  copy_file '.tool-versions', '.tool-versions'
+end
+
+def add_essential_gems
   gem_group :development, :test do
     gem 'factory_bot_rails'
     gem 'rails-controller-testing'
@@ -38,7 +44,23 @@ def add_testing_gems
     gem 'faker'
     gem 'selenium-webdriver'
   end
+
+  gem_group :development do
+    gem "rubocop", require: false
+  end
 end
+
+def setup_homepage_template
+  # routes
+  route "root to: 'home#index'"
+
+  # controllers
+  copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
+
+  # views
+  copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+end
+
 
 def setup_package_json
   remove_file 'package.json'
@@ -60,23 +82,25 @@ end
 
 def copy_linter_files
   copy_file '.stylelintrc', '.stylelintrc'
+  copy_file '.rubocop.yml', '.rubocop.yml'
 end
 
-def initial_commit
-  git :init
-  git add: '.'
-  git commit: "-a -m 'Initial commit'"
-end
 
-def setup_homepage_template
-  # routes
-  route "root to: 'home#index'"
+def post_install_requirements
+  # create db
+  run 'bundle exec rails db:create'
 
-  # controllers
-  copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
+  # db migrate
+  run 'bundle exec rails db:migrate'
 
-  # views
-  copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+  # webpacker
+  run 'bundle exec rails webpacker:install' if options['webpack']
+
+  # rspec
+  # fixes intermittent failures in rspec generator
+  run 'bundle exec spring stop'
+  run 'bundle exec spring binstub --all'
+  run 'bundle exec rails generate rspec:install'
 end
 
 def webpack_folder_structure
@@ -108,29 +132,6 @@ def webpack_folder_structure
   end
 end
 
-def setup_asdf
-  copy_file '.tool-versions', '.tool-versions'
-end
-
-def post_install_requirements
-  # create db
-  run 'bundle exec rails db:create'
-
-  # db migrate
-  run 'bundle exec rails db:migrate'
-
-  # webpacker
-  run 'bundle exec rails webpacker:install' if options['webpack']
-
-  # rspec
-  # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
-end
-
-def check_ruby_version; end
-
 def add_rspec_examples
   # models
   copy_file 'spec/models/.keep', 'spec/models/.keep'
@@ -142,11 +143,17 @@ def add_rspec_examples
   copy_file 'spec/features/visitor_sees_homepage_spec.rb', 'spec/features/visitor_sees_homepage_spec.rb'
 end
 
+def initial_commit
+  git :init
+  git add: '.'
+  git commit: "-a -m 'Initial commit'"
+end
+
 check_ruby_version
 add_template_repository_to_source_path
 setup_asdf
 
-add_testing_gems
+add_essential_gems
 setup_homepage_template
 
 setup_package_json
