@@ -11,7 +11,7 @@
 
 I recommend using `asdf` to manage ruby and nodejs versions.
 
-### Usage
+### Basic Usage
 
 ```
 rails new appname \
@@ -31,33 +31,20 @@ rails new appname --database=postgresql --skip-test \
 
 - Initial folder structure if `--webpack` is enabled
 
-![](demo/webpack-folder-structure.png)
+  <p align="center">
+    <img src="demo/webpack-folder-structure.png"/>
+  </p>
 
 - Working rspec examples
 - Essential packages
   - sanitize.css
-- Stylelint config
-
+- Stylelint
   - stylelint
   - stylelint-config-standard
   - stylelint-rscss
   - stylelint-8-point-grid
-
-  ```
-  {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-rscss/config",
-      "stylelint-8-point-grid"
-    ],
-    rules: {
-      "plugin/8-point-grid": {
-      "base": 8,
-      "whitelist": ["4px", "2px", "1px"]
-      }
-    }
-  }
-  ```
+- Prettier
+  - prettier-eslint-cli
 
 ## TODO
 
@@ -69,7 +56,6 @@ rails new appname --database=postgresql --skip-test \
 - Finish linters
   - Rubocop
   - Eslint
-  - Prettier
 - Use `.haml`
 - Improve homepage style
 - Initial react setup

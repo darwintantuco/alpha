@@ -54,7 +54,8 @@ def add_linter_packages
     stylelint \
     stylelint-config-standard \
     stylelint-rscss \
-    stylelint-8-point-grid'
+    stylelint-8-point-grid \
+    prettier-eslint-cli'
 end
 
 def copy_linter_files
