@@ -100,9 +100,6 @@ def post_install_requirements
   run 'bundle exec spring stop'
   run 'bundle exec spring binstub --all'
   run 'bundle exec rails generate rspec:install'
-
-  # generate .rubocop_todo.yml
-  run 'rubocop --auto-gen-config'
 end
 
 def webpack_folder_structure
@@ -151,6 +148,15 @@ def initial_commit
   git commit: "-a -m 'Initial commit'"
 end
 
+def initial_lint_fixes
+  # generate .rubocop_todo.yml
+  run 'rubocop --auto-gen-config'
+  run 'yarn run prettier:fix'
+
+  git add: '.'
+  git commit: "-a -m 'Initial lint fixes'"
+end
+
 check_ruby_version
 add_template_repository_to_source_path
 setup_asdf
@@ -168,4 +174,5 @@ after_bundle do
   webpack_folder_structure if options['webpack']
   add_rspec_examples
   initial_commit
+  initial_lint_fixes
 end

@@ -30,11 +30,6 @@ rails new appname --database=postgresql --skip-test \
 ## Features
 
 - Initial folder structure if `--webpack` is enabled
-
-  <p align="center">
-    <img src="demo/webpack-folder-structure.png"/>
-  </p>
-
 - Working rspec examples
 - Essential packages
   - sanitize.css
@@ -58,7 +53,6 @@ rails new appname --database=postgresql --skip-test \
 - Add sample js tests
 - Docker setup
 - Circleci config and instructions
-- Add scripts for linters / CI
 - One source for specifying versions (ruby/nodejs/etc)
 
 ## License
