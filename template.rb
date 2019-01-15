@@ -67,6 +67,15 @@ def setup_homepage_template
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 end
 
+def setup_asdf
+  copy_file '.tool-versions', '.tool-versions'
+end
+
+def check_ruby_version; end
+
+check_ruby_version
+setup_asdf
+
 add_template_repository_to_source_path
 add_testing_gems
 setup_homepage_template
