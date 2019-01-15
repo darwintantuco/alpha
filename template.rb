@@ -101,6 +101,11 @@ def webpack_folder_structure
   inject_into_file 'app/views/layouts/application.html.erb', after: "<%= stylesheet_link_tag    'application', media: 'all' %>" do
     "\n    <%= javascript_pack_tag 'application' %>\n    <%= stylesheet_pack_tag 'application' %>\n"
   end
+
+  # render sample icon
+  inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
+    "\n  <%= image_tag asset_pack_path("images/rails-logo.svg"), class: "logo" %> \n"
+  end
 end
 
 def setup_asdf
@@ -115,7 +120,7 @@ def post_install_requirements
   run 'bundle exec rails db:migrate'
 
   # webpacker
-  run 'bundle exec rails webpacker:install'
+  run 'bundle exec rails webpacker:install' if options['webpack']
 
   # rspec
   # fixes intermittent failures in rspec generator
