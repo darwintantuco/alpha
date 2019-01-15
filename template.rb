@@ -44,7 +44,11 @@ def setup_package_json
   template 'package.json.erb', 'package.json'
 end
 
-def add_yarn_linters
+def add_essential_packages
+  run 'yarn add sanitize.css'
+end
+
+def add_linter_packages
   run 'yarn add --dev \
     stylelint \
     stylelint-rscss \
@@ -65,6 +69,16 @@ def setup_homepage_template
   route "root to: 'home#index'"
   copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+end
+
+def setup_initial_folder_structure
+  remove_file 'app/javascript/packs/application.js'
+
+  copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
+  copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
+  copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
+  copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
+  copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
 end
 
 def setup_asdf
@@ -89,10 +103,12 @@ add_testing_gems
 setup_homepage_template
 
 setup_package_json
-add_yarn_linters
+add_essential_packages
+add_linter_packages
 copy_linter_files
 
 after_bundle do
   post_install_requirements
+  setup_initial_folder_structure
   initial_commit
 end
