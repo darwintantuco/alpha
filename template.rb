@@ -76,10 +76,6 @@ def setup_homepage_template
 
   # views
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
-
-  # layout
-  remove_file 'app/views/layouts/application.html.erb'
-  copy_file 'app/views/layouts/application.html.erb.tt', 'app/views/layouts/application.html.erb'
 end
 
 def webpack_folder_structure
