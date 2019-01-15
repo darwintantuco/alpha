@@ -20,6 +20,7 @@
 - [x] Don't use CoffeeScript
 - [x] Skip JavaScript files
 - [x] Preconfigured with webpack
+- [ ] Use `.haml`
 
 ## Templates
 

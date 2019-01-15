@@ -61,8 +61,16 @@ def initial_commit
   git commit: "-a -m 'Initial commit'"
 end
 
+def setup_homepage_template
+  route 'root to: home#index'
+  copy 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
+  copy 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+end
+
 add_template_repository_to_source_path
 add_testing_gems
+setup_homepage_template
+
 setup_package_json
 add_yarn_linters
 copy_linter_files
