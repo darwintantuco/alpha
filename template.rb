@@ -62,7 +62,7 @@ def initial_commit
 end
 
 def setup_homepage_template
-  route 'root to: home#index'
+  route "root to: 'home#index'"
   copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 end
@@ -74,6 +74,9 @@ end
 def post_install_requirements
   # webpacker
   run 'bundle exec rails webpacker:install'
+
+  # create db
+  run 'bundle exec rails db:create'
 end
 
 def check_ruby_version; end
