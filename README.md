@@ -25,8 +25,7 @@
 ## Templates
 
 - [ ] homepage
-- [ ] css folder structure
-- [ ] js folder structure
+- [x] js/css/images folder structure
 - [ ] Docker Setup
 - [ ] circeci config
 - [ ] react setup
@@ -45,6 +44,6 @@
 ## Linters/Fixers
 
 - [ ] Rubocop
-- [ ] Stylelint
+- [x] Stylelint
 - [ ] Eslint
 - [ ] Prettier

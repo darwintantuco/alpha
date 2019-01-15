@@ -51,6 +51,7 @@ end
 def add_linter_packages
   run 'yarn add --dev \
     stylelint \
+    stylelint-config-standard \
     stylelint-rscss \
     stylelint-8-point-grid'
 end
@@ -66,10 +67,16 @@ def initial_commit
 end
 
 def setup_homepage_template
+  # routes
   route "root to: 'home#index'"
+
+  # controllers
   copy_file 'app/controllers/home_controller.rb', 'app/controllers/home_controller.rb'
+
+  # views
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 
+  # layout
   remove_file 'app/views/layouts/application.html.erb'
   copy_file 'app/views/layouts/application.html.erb', 'app/views/layouts/application.html.erb'
 end
@@ -77,11 +84,19 @@ end
 def setup_initial_folder_structure
   remove_file 'app/javascript/packs/application.js'
 
+  # css
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
   copy_file 'app/javascript/css/components/home-page.scss', 'app/javascript/css/components/home-page.scss'
+
+  # images
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
+  copy_file 'app/javascript/images/rails-logo.svg', 'app/javascript/images/rails-logo.svg'
+
+  # js
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
+
+  # packs
   copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
 end
 

@@ -1,3 +1,9 @@
 .home-page {
-  color: red;
+  > .logo {
+    width: 240px;
+  }
+
+  > .note {
+    color: red;
+  }
 }
