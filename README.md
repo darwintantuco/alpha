@@ -14,7 +14,7 @@ I recommend using `asdf` to manage ruby and nodejs versions.
 ### Usage
 
 ```
-  rails new appname
+  rails new appname \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
@@ -31,6 +31,8 @@ I recommend using `asdf` to manage ruby and nodejs versions.
 
 - Initial folder structure if `--webpack` is enabled
 - Working rspec examples
+- Essential packages
+  - sanitize.css
 - Stylelint config
   - stylelint
   - stylelint-config-standard
