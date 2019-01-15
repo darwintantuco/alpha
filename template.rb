@@ -95,6 +95,12 @@ def webpack_folder_structure
 
   # packs
   copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
+
+  # add pack tags in application layout
+  inject_into_file 'app/views/layouts/application.html.erb', after: "<%= stylesheet_link_tag    'application', media: 'all' %>" do
+    "\n    config.logger = Logger.new(config.paths.log.first, 50, 1048576)\n"
+    "\n    <%= javascript_pack_tag 'application' %>\n    <%= stylesheet_pack_tag 'application' %>\n"
+  end
 end
 
 def setup_asdf
@@ -112,7 +118,7 @@ def post_install_requirements
   run 'bundle exec rails webpacker:install'
 
   # rspec
-  # attempt to fix intermittent failures in rspec generator
+  # fixes intermittent failures in rspec generator
   run 'bundle exec spring stop'
   run 'bundle exec spring binstub --all'
   run 'bundle exec rails generate rspec:install'
