@@ -45,6 +45,8 @@ rails new appname --database=postgresql --skip-test \
 
 ## TODO
 
+- Version checking
+- One source for specifying versions (ruby/nodejs/etc)
 - Finish rspec gems setup
   - factory_bot_rails
   - database_cleaner
@@ -54,9 +56,8 @@ rails new appname --database=postgresql --skip-test \
 - Improve homepage style
 - Initial react setup
 - Add sample js tests
-- Docker setup
+- Docker setup and instructions
 - Circleci config and instructions
-- One source for specifying versions (ruby/nodejs/etc)
 
 ## License
 

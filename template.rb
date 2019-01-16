@@ -59,7 +59,6 @@ def setup_homepage_template
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 end
 
-
 def setup_package_json
   remove_file 'package.json'
   template 'package.json.tt', 'package.json'
@@ -87,7 +86,6 @@ def copy_linter_files
   copy_file '.eslintrc', '.eslintrc'
   copy_file '.stylelintrc', '.stylelintrc'
 end
-
 
 def post_install_requirements
   # create db
@@ -160,6 +158,11 @@ end
 
 def initial_lint_fixes
   run 'yarn run prettier:fix'
+  # disable eslint
+  # this file requires js through rails
+  inject_into_file 'app/assets/javascripts/cable.js', after: "//= require_tree ./channels\n" do
+    "\n/* eslint-disable */\n"
+  end
   git add: '.'
   git commit: "-a -m 'Initial lint fixes'"
 end
@@ -172,7 +175,7 @@ add_essential_gems
 setup_homepage_template
 
 setup_package_json
-add_essential_packages
+add_essential_packages if options['webpack']
 add_linter_packages
 copy_linter_files
 
