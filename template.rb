@@ -1,7 +1,9 @@
 require 'fileutils'
 require 'shellwords'
 
-def check_ruby_version; end
+def check_ruby_version
+  binding.pry
+end
 
 # Copied from https://github.com/mattbrictson/rails-template
 # Add this template directory to source_paths so that Thor actions like
@@ -27,8 +29,9 @@ def add_template_repository_to_source_path
   end
 end
 
-def setup_asdf
+def setup_tooling
   copy_file '.tool-versions', '.tool-versions'
+  copy_file 'Procfile', 'Procfile'
 end
 
 def add_essential_gems
@@ -173,7 +176,7 @@ end
 
 check_ruby_version
 add_template_repository_to_source_path
-setup_asdf
+setup_tooling
 
 add_essential_gems
 setup_homepage_template
