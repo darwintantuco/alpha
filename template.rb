@@ -157,12 +157,11 @@ def generate_rubocop_todo
 end
 
 def initial_lint_fixes
-  run 'yarn run prettier:fix'
-  # disable eslint
-  # this file requires js through rails
+  # disable eslint this file, this requires js through rails magic
   inject_into_file 'app/assets/javascripts/cable.js', after: "//= require_tree ./channels\n" do
     "\n/* eslint-disable */\n"
   end
+  run 'yarn run prettier:fix'
   git add: '.'
   git commit: "-a -m 'Initial lint fixes'"
 end
