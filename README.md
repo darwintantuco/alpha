@@ -9,8 +9,8 @@ This is my attempt to make it as fast as possible.
 ### Requirements
 
 - ruby 2.6.0
-- nodejs 10.4.0
 - rails 5.2
+- nodejs 10.4.0
 - yarn
 
 I recommend using `asdf` to manage ruby and nodejs versions.
