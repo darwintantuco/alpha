@@ -158,10 +158,14 @@ end
 
 def initial_lint_fixes
   # disable eslint this file, this requires js through rails magic
-  inject_into_file 'app/assets/javascripts/cable.js', after: "//= require_tree ./channels\n" do
-    "\n/* eslint-disable */\n"
+  file = 'app/assets/javascripts/cable.js'
+  if File.file?(file)
+    inject_into_file file, after: "//= require_tree ./channels\n" do
+      "\n/* eslint-disable */\n"
+    end
   end
   run 'yarn run prettier:fix'
+
   git add: '.'
   git commit: "-a -m 'Initial lint fixes'"
 end
