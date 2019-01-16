@@ -33,41 +33,93 @@ rails new appname --database=postgresql --skip-test \
 
 ## Features
 
-- Initial folder structure if `--webpack` is enabled
-- Working rspec examples
-- Essential gems
+- Folder Structure for `--webpack`
+- Essential npm packages for `--webpack`
+- Use [slim](https://github.com/slim-template/slim) as templating language
+- Rspec test suite
+- Preconfigured linters
+- Scripts
 
-  ```ruby
-  gem_group :development, :test do
-    gem 'factory_bot_rails'
-    gem 'rails-controller-testing'
-    gem 'rspec-rails'
-    gem "rubocop", require: false
-    gem 'rubocop-rspec'
-  end
+### Folder Structure
 
-  gem_group :test do
-    gem 'capybara'
-    gem 'chromedriver-helper'
-    gem 'database_cleaner'
-    gem 'faker'
-    gem 'selenium-webdriver'
-  end
-  ```
+```
+├── app
+├── channels
+├── assets
+├── channels
+├── javascript
+│   ├── css
+│   │   ├── components
+│   │   │   └── home-page.scss
+│   │   ├── application.scss
+│   │   └── vendor.scss
+│   ├── images
+│   │   ├── application.js
+│   │   └── rails-logo.svg
+│   ├── js
+│   │   └── application.js
+│   └── packs
+│       └── application.js
+├── jobs
+└── mailers
+```
 
-- Essential packages
-  - sanitize.css
-- Linters
-  - Rubocop
-  - Eslint
-  - Prettier
-  - Stylelint
+### Essential packages
+
+- sanitize.css
+
+### Rspec test suite
+
+Includes rspec and other gems useful in testing.
+
+```ruby
+gem_group :development, :test do
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem "rubocop", require: false
+  gem 'rubocop-rspec'
+end
+
+gem_group :test do
+  gem 'capybara'
+  gem 'chromedriver-helper'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'selenium-webdriver'
+end
+```
+
+### Preconfigured linters
+
+- Rubocop
+- Eslint
+- Prettier
+- Stylelint
+
+### Scripts
+
+|         Command         |               Description                |
+| :---------------------: | :--------------------------------------: |
+|   yarn run lint:ruby    |                 rubocop                  |
+|    yarn run lint:js     |                  eslint                  |
+|    yarn run lint:css    |                stylelint                 |
+| yarn run prettier:check |             prettier-eslint              |
+|  yarn run prettier:fix  |             prettier-eslint              |
+|    yarn run lint:ci     | rubocop eslint stylelint prettier-eslint |
+
+## Post Install Guide
+
+### Convert existing erb files to slim
+
+1. `gem install html2slim`
+1. Run `erb2slim -d app/views` on project directory
+1. `gem uninstall html2slim`
 
 ## TODO
 
 - One source for specifying versions (ruby/nodejs/etc) (use `.tool-versions`?)
 - Finish post setup of essential gems
-- Use `.haml`
 - Improve homepage style
 - Initial react setup
 - Add sample js tests
