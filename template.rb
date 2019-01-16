@@ -7,10 +7,13 @@ end
 
 def check_ruby_version
   # Refactor,  get from .tool-versions instead'
+  # Improve checking logic, allow future versions lol
+  # allow ruby 2.7.x
+  # allow rails 5.3.x
   minimum_ruby_version = '2.6'
   minimum_rails_version = '5.2'
   abort("Aborted! Required ruby version: > #{minimum_ruby_version}") unless RUBY_VERSION.to_s.include? minimum_ruby_version
-  abort("Aborted! Required rails version: > #{minimum_rails_version}") unless rails.version.to_s.include? minimum_rails_version
+  abort("Aborted! Required rails version: > #{minimum_rails_version}") unless rails_version.to_s.include? minimum_rails_version
 end
 
 # Copied from https://github.com/mattbrictson/rails-template
