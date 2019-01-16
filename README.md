@@ -65,8 +65,7 @@ rails new appname --database=postgresql --skip-test \
 
 ## TODO
 
-- Version checking
-- One source for specifying versions (ruby/nodejs/etc)
+- One source for specifying versions (ruby/nodejs/etc) (use `.tool-versions`?)
 - Finish post setup of essential gems
 - Use `.haml`
 - Improve homepage style
