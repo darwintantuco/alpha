@@ -49,7 +49,7 @@ end
 
 def setup_tooling
   copy_file '.tool-versions', '.tool-versions'
-  copy_file 'Procfile', 'Procfile'
+  copy_file 'Procfile', 'Procfile' if options[:webpack]
 end
 
 def add_essential_gems
