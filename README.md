@@ -35,6 +35,26 @@ rails new appname --database=postgresql --skip-test \
 
 - Initial folder structure if `--webpack` is enabled
 - Working rspec examples
+- Essential gems
+
+  ```ruby
+  gem_group :development, :test do
+    gem 'factory_bot_rails'
+    gem 'rails-controller-testing'
+    gem 'rspec-rails'
+    gem "rubocop", require: false
+    gem 'rubocop-rspec'
+  end
+
+  gem_group :test do
+    gem 'capybara'
+    gem 'chromedriver-helper'
+    gem 'database_cleaner'
+    gem 'faker'
+    gem 'selenium-webdriver'
+  end
+  ```
+
 - Essential packages
   - sanitize.css
 - Linters
@@ -47,11 +67,7 @@ rails new appname --database=postgresql --skip-test \
 
 - Version checking
 - One source for specifying versions (ruby/nodejs/etc)
-- Finish rspec gems setup
-  - factory_bot_rails
-  - database_cleaner
-  - faker
-  - selenium-webdriver
+- Finish post setup of essential gems
 - Use `.haml`
 - Improve homepage style
 - Initial react setup
