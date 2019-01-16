@@ -1,8 +1,14 @@
 require 'fileutils'
 require 'shellwords'
 
+def rails_version
+  run 'rails -v'
+end
+
 def check_ruby_version
-  binding.pry
+  p options
+  p RUBY_VERSION
+  p rails_version
 end
 
 # Copied from https://github.com/mattbrictson/rails-template
