@@ -42,6 +42,7 @@ def add_essential_gems
 
   gem_group :test do
     gem 'capybara'
+    gem 'chromedriver-helper'
     gem 'database_cleaner'
     gem 'faker'
     gem 'selenium-webdriver'
@@ -157,7 +158,7 @@ def generate_rubocop_todo
 end
 
 def initial_lint_fixes
-  # disable eslint this file, this requires js through rails magic
+  # disable eslint for this file, it requires js through rails magic
   file = 'app/assets/javascripts/cable.js'
   if File.file?(file)
     inject_into_file file, after: "//= require_tree ./channels\n" do
