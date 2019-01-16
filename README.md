@@ -1,5 +1,9 @@
 # alpha
 
+Setting up a rails project takes at least one day to configure.
+
+This is my attempt to make it as fast as possible.
+
 ## Getting Started
 
 ### Requirements
@@ -35,8 +39,9 @@ rails new appname --database=postgresql --skip-test \
   - sanitize.css
 - Linters
   - Rubocop
-  - Stylelint
+  - Eslint
   - Prettier
+  - Stylelint
 
 ## TODO
 
@@ -45,8 +50,6 @@ rails new appname --database=postgresql --skip-test \
   - database_cleaner
   - faker
   - selenium-webdriver
-- Finish linters
-  - Eslint
 - Use `.haml`
 - Improve homepage style
 - Initial react setup

@@ -76,12 +76,16 @@ def add_linter_packages
     stylelint-rscss \
     stylelint-8-point-grid \
     prettier-eslint-cli \
+    standard \
+    babel-eslint \
+    eslint-plugin-flowtype \
     npm-run-all'
 end
 
 def copy_linter_files
-  copy_file '.stylelintrc', '.stylelintrc'
   copy_file '.rubocop.yml', '.rubocop.yml'
+  copy_file '.eslintrc', '.eslintrc'
+  copy_file '.stylelintrc', '.stylelintrc'
 end
 
 

@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "lint:ruby": "rubocop --require rubocop-rspec",
+    "lint:js": "eslint \"./app/**/*.{js,jsx}\"",
     "lint:css": "stylelint \"./app/**/*.scss\"",
     "prettier:check": "prettier-eslint --list-different \"./app/**/*.scss\" \"./app/**/*.{js,jsx}\"",
     "prettier:fix": "prettier-eslint --write \"./app/**/*.scss\" \"./app/**/*.{js,jsx}\"",
-    "lint:ci": "run-s lint:ruby lint:css prettier:check"
+    "lint:ci": "run-s lint:ruby lint:js lint:css prettier:check"
   }
 }
