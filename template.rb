@@ -83,9 +83,23 @@ def setup_homepage_template
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
 end
 
+def insert_yarn_scripts
+  inject_into_file 'package.json', after: '  "private": true,' do
+    <<~EOS.chomp
+    \n  "scripts": {
+        "lint:ruby": "rubocop --require rubocop-rspec",
+        "lint:js": "eslint \\"./app/**/*.{js,jsx}\\"",
+        "lint:css": "stylelint \\"./app/**/*.scss\\"",
+        "prettier:check": "prettier-eslint --list-different \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
+        "prettier:fix": "prettier-eslint --write \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
+        "lint:ci": "run-s lint:ruby lint:js lint:css prettier:check"
+      },
+    EOS
+  end
+end
+
 def setup_package_json
-  remove_file 'package.json'
-  template 'package.json.tt', 'package.json'
+  insert_yarn_scripts
 end
 
 def add_essential_packages
