@@ -143,8 +143,6 @@ def post_install_requirements
 end
 
 def webpack_folder_structure
-  remove_file 'app/javascript/packs/application.js'
-
   # css
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
@@ -158,16 +156,32 @@ def webpack_folder_structure
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
 
   # packs
-  copy_file 'app/javascript/packs/application.js', 'app/javascript/packs/application.js'
+  inject_into_file 'app/javascript/packs/application.js',
+    after: "// layout file, like app/views/layouts/application.html.erb" do
+    <<~EOS.chomp
+    \nimport "../js/application";
+
+    import "../css/vendor";
+    import "../css/application";
+
+    import "../images/application";
+    EOS
+  end
 
   # add pack tags in application layout
-  inject_into_file 'app/views/layouts/application.html.erb', after: "<%= stylesheet_link_tag    'application', media: 'all' %>" do
-    "\n    <%= javascript_pack_tag 'application' %>\n    <%= stylesheet_pack_tag 'application' %>\n"
+  inject_into_file 'app/views/layouts/application.html.erb',
+    after: "<%= stylesheet_link_tag    'application', media: 'all' %>" do
+    <<~EOS.chomp
+    \n    <%= javascript_pack_tag 'application' %>
+        <%= stylesheet_pack_tag 'application' %>
+    EOS
   end
 
   # render sample icon
   inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
-    "\n  <%= image_tag asset_pack_path('images/rails-logo.svg'), class: 'logo' %> \n"
+    <<~EOS.chomp
+    \n  <%= image_tag asset_pack_path('images/rails-logo.svg'), class: 'logo' %>
+    EOS
   end
 end
 
