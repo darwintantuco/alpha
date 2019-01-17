@@ -1,25 +1,24 @@
 require 'fileutils'
 require 'shellwords'
 
+MINIMUM_RUBY_VERSION = '2.6.0'
+MINIMUM_RAILS_VERSION = '5.2.0'
+
 def version(version)
   Gem::Version.create(version)
 end
 
-def version_met?(current, expected)
+def minimum_version_met?(current, expected)
   (version(current) <=> version(expected)) >= 0
 end
 
-def check_ruby_version
-  # Refactor,  get from .tool-versions instead'
-  minimum_ruby_version = '2.6.0'
-  minimum_rails_version = '5.2.0'
-
-  unless version_met?(RUBY_VERSION.to_s, minimum_ruby_version)
-    abort("Aborted! Required ruby version >=#{minimum_ruby_version}.")
+def check_requirements
+  unless minimum_version_met? RUBY_VERSION, MINIMUM_RUBY_VERSION
+    abort("Aborted! Required ruby version >=#{MINIMUM_RUBY_VERSION}.")
   end
 
-  unless version_met?(Rails.version.to_s, minimum_rails_version)
-    abort("Aborted! Required rails version >=#{minimum_rails_version}")
+  unless minimum_version_met? Rails.version, MINIMUM_RAILS_VERSION
+    abort("Aborted! Required rails version >=#{MINIMUM_RAILS_VERSION}.")
   end
 end
 
@@ -222,8 +221,9 @@ def initial_lint_fixes
   git commit: "-a -m 'Initial lint fixes'"
 end
 
-check_ruby_version
+check_requirements
 add_template_repository_to_source_path
+
 setup_tooling
 
 add_essential_gems

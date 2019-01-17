@@ -141,7 +141,6 @@ end
 
 ## TODO
 
-- One source for specifying versions (ruby/nodejs/etc) (use `.tool-versions`?)
 - Finish post setup of essential gems
 - Improve homepage style
 - Initial react setup
