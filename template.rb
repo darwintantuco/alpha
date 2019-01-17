@@ -53,7 +53,7 @@ def setup_tooling
 end
 
 def add_essential_gems
-  gem 'slim-rails'
+  gem 'hamlit-rails'
 
   gem_group :development, :test do
     gem 'factory_bot_rails'

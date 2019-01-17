@@ -33,14 +33,16 @@ rails new appname --database=postgresql --skip-test \
 
 ## Features
 
-- Folder Structure for `--webpack`
-- Essential npm packages for `--webpack`
-- Use [slim](https://github.com/slim-template/slim) as templating language
+- Initial Webpacker Setup (`--webpack`)
+- Essential npm packages (`--webpack`)
+- Use [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec test suite
 - Preconfigured linters
 - Scripts
 
-### Folder Structure
+### Initial Webpacker Setup
+
+#### Folder Structure
 
 ```
 ├── app
@@ -110,11 +112,32 @@ end
 
 ## Post Install Guide
 
-### Convert existing erb files to slim
+### Convert existing erb files to haml
 
-1. `gem install html2slim`
-1. Run `erb2slim -d app/views` on project directory
-1. `gem uninstall html2slim`
+1. Install html2haml
+
+   ```
+   $ gem install html2haml
+   ```
+
+1. Convert erb files to haml (keeps original file)
+
+   ```
+   $ find . -name \*.erb -print | sed 'p;s/.erb$/.haml/' | xargs -n2 html2haml
+   ```
+
+1. Delete existing erb files
+
+   ```
+   $ find . -name \*.erb | xargs git rm
+   ```
+
+1. Commit the changes.
+1. Uninstall
+
+   ```
+   $ gem uninstall html2haml
+   ```
 
 ## TODO
 
