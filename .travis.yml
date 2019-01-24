@@ -1,0 +1,5 @@
+language: ruby
+rvm:
+  - ruby 2.6.0
+install: gem install rails
+script: yarn && yarn test
