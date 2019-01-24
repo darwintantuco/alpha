@@ -24,7 +24,7 @@ teardown() {
   assert_success
 
   # no webpacker setup
-  refute [ -e "$WORKSPACE/appname/javascript/packs/application.js" ]
+  refute [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
 
   # no essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
@@ -45,7 +45,7 @@ teardown() {
   assert_success
 
   # webpacker setup
-  assert [ -e "$WORKSPACE/appname/javascript/packs/application.js" ]
+  assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
 
   # essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
