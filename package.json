@@ -1,0 +1,18 @@
+{
+  "name": "alpha",
+  "version": "0.0.1",
+  "description": "Rails app template with sensible defaults 🚀",
+  "main": "index.js",
+  "repository": "https://github.com/dcrtantuco/alpha",
+  "author": "darwin christopher tantuco <darwinxciii@yahoo.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "bats --tap ./tests/*.bats"
+  },
+  "devDependencies": {
+    "bats": "^1.0.2",
+    "bats-assert": "https://github.com/ztombol/bats-assert",
+    "bats-support": "https://github.com/ztombol/bats-support"
+  }
+}
