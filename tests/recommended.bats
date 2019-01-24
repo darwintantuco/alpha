@@ -34,6 +34,7 @@ teardown() {
   assert [ -e "$WORKSPACE/appname/javascript/packs/application.js" ]
 }
 
-@test 'Yarn scripts' {
-  cat $WORKSPACE/appname/package.json | grep scripts
+@test 'Essential yarn packages' {
+  run cat $WORKSPACE/appname/package.json | grep sanitize
+  assert_success
 }

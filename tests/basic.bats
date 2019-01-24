@@ -22,3 +22,12 @@ teardown() {
 @test 'Returns exit 0' {
   assert_success
 }
+
+@test 'No webpacker setup' {
+  refute [ -e "$WORKSPACE/appname/javascript/packs/application.js" ]
+}
+
+@test 'No essential yarn packages' {
+  run cat $WORKSPACE/appname/package.json | grep sanitize
+  assert_failure
+}
