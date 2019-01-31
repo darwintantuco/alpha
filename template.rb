@@ -253,7 +253,7 @@ after_bundle do
   run 'bundle exec rails db:create'
   run 'bundle exec rails db:migrate'
 
-  if options ['webpack']
+  if options['webpack']
     run 'bundle exec rails webpacker:install'
 
     git add: '.'
