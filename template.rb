@@ -97,12 +97,24 @@ def insert_yarn_scripts
   end
 end
 
-def setup_package_json
-  insert_yarn_scripts
-end
-
 def add_essential_packages
   run 'yarn add sanitize.css'
+end
+
+def setup_react
+  run 'yarn add \
+    @babel/preset-react \
+    remount \
+    react'
+
+  inject_into_file '.babelrc',
+    after: '"presets": [' do
+    <<~EOS.chomp
+    \n    "react",
+    EOS
+  end
+
+
 end
 
 def add_linter_packages
@@ -116,6 +128,11 @@ def add_linter_packages
     babel-eslint \
     eslint-plugin-flowtype \
     npm-run-all'
+
+  insert_yarn_scripts
+
+  git add: '.'
+  git commit: "-a -m 'Add linter packages'"
 end
 
 def copy_linter_files
@@ -132,16 +149,24 @@ def post_install_requirements
   run 'bundle exec rails db:migrate'
 
   # webpacker
-  run 'bundle exec rails webpacker:install' if options['webpack']
+  if options ['webpack']
+    run 'bundle exec rails webpacker:install'
+
+    git add: '.'
+    git commit: "-a -m 'Execute rails webpacker:install'"
+  end
 
   # rspec
   # fixes intermittent failures in rspec generator
   run 'bundle exec spring stop'
   run 'bundle exec spring binstub --all'
   run 'bundle exec rails generate rspec:install'
+
+  git add: '.'
+  git commit: "-a -m 'Execute rspec:install'"
 end
 
-def webpack_folder_structure
+def initial_webpack_assets
   # css
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
@@ -153,6 +178,10 @@ def webpack_folder_structure
 
   # js
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
+
+  # react
+  copy_file 'app/javascript/react/application.js', 'app/javascript/react/application.js'
+  copy_file 'app/javascript/react/Greeter.js', 'app/javascript/react/Greeter.js'
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
@@ -182,6 +211,16 @@ def webpack_folder_structure
     \n  <%= image_tag asset_pack_path('images/rails-logo.svg'), class: 'logo' %>
     EOS
   end
+
+  # render greeter component
+  inject_into_file 'app/views/home/index.html.erb', after: '</div>' do
+    <<~EOS.chomp
+    \n<x-greeter props-json='{"name":"Lodi"}'></x-greeter>
+    EOS
+  end
+
+  git add: '.'
+  git commit: "-a -m 'Initial webpack assets'"
 end
 
 def add_rspec_examples
@@ -228,17 +267,17 @@ setup_tooling
 
 add_essential_gems
 setup_homepage_template
+initial_commit
 
-setup_package_json
 add_essential_packages if options['webpack']
+setup_react if options['webpack']
 add_linter_packages
 copy_linter_files
 
 after_bundle do
   post_install_requirements
-  webpack_folder_structure if options['webpack']
+  initial_webpack_assets if options['webpack']
   add_rspec_examples
-  initial_commit
   generate_rubocop_todo
   initial_lint_fixes
 end

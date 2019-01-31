@@ -6,10 +6,10 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-
-import "../js/application";
+import "../images/application";
 
 import "../css/vendor";
 import "../css/application";
 
-import "../images/application";
+import "../js/application";
+import "../react/application";

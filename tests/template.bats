@@ -21,6 +21,7 @@ teardown() {
   run rails new appname \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
+  # exit code 0
   assert_success
 
   # no webpacker setup
@@ -42,6 +43,8 @@ teardown() {
     --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
+
+  # exit code 0
   assert_success
 
   # webpacker setup
