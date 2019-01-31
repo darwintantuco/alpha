@@ -114,7 +114,8 @@ def setup_react
     EOS
   end
 
-
+  git add: '.'
+  git commit: "-a -m 'Add react packages'"
 end
 
 def add_linter_packages
@@ -139,31 +140,6 @@ def copy_linter_files
   copy_file '.rubocop.yml', '.rubocop.yml'
   copy_file '.eslintrc', '.eslintrc'
   copy_file '.stylelintrc', '.stylelintrc'
-end
-
-def post_install_requirements
-  # create db
-  run 'bundle exec rails db:create'
-
-  # db migrate
-  run 'bundle exec rails db:migrate'
-
-  # webpacker
-  if options ['webpack']
-    run 'bundle exec rails webpacker:install'
-
-    git add: '.'
-    git commit: "-a -m 'Execute rails webpacker:install'"
-  end
-
-  # rspec
-  # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
-
-  git add: '.'
-  git commit: "-a -m 'Execute rspec:install'"
 end
 
 def initial_webpack_assets
@@ -270,14 +246,32 @@ setup_homepage_template
 initial_commit
 
 add_essential_packages if options['webpack']
-setup_react if options['webpack']
 add_linter_packages
 copy_linter_files
 
 after_bundle do
-  post_install_requirements
-  initial_webpack_assets if options['webpack']
+  run 'bundle exec rails db:create'
+  run 'bundle exec rails db:migrate'
+
+  if options ['webpack']
+    run 'bundle exec rails webpacker:install'
+
+    git add: '.'
+    git commit: "-a -m 'Execute rails webpacker:install'"
+
+    initial_webpack_assets
+    setup_react
+  end
+
+  # fixes intermittent failures in rspec generator
+  run 'bundle exec spring stop'
+  run 'bundle exec spring binstub --all'
+  run 'bundle exec rails generate rspec:install'
   add_rspec_examples
+
+  git add: '.'
+  git commit: "-a -m 'Setup rspec'"
+
   generate_rubocop_todo
   initial_lint_fixes
 end
