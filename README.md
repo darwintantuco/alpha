@@ -86,8 +86,9 @@ rails new appname \
 
 ### Initial React Setup
 
-- Preconfigured packages:
+- Added packages:
   - react
+  - react-dom
   - babel-preset-react
   - remount
 - Working greeter component

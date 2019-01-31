@@ -105,7 +105,8 @@ def setup_react
   run 'yarn add \
     babel-preset-react \
     remount \
-    react'
+    react \
+    react-dom'
 
   inject_into_file '.babelrc',
     after: '"presets": [' do
