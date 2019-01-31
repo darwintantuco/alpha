@@ -103,7 +103,7 @@ end
 
 def setup_react
   run 'yarn add \
-    @babel/preset-react \
+    babel-preset-react \
     remount \
     react'
 
@@ -163,12 +163,13 @@ def initial_webpack_assets
   inject_into_file 'app/javascript/packs/application.js',
     after: "// layout file, like app/views/layouts/application.html.erb" do
     <<~EOS.chomp
-    \nimport "../js/application";
+    \nimport "../images/application";
 
     import "../css/vendor";
     import "../css/application";
 
-    import "../images/application";
+    import "../js/application";
+    import "../react/application";
     EOS
   end
 
