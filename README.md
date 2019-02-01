@@ -57,8 +57,6 @@ rails new appname \
 
 ### Initial Webpacker Setup
 
-#### Homepage (TODO)
-
 #### Folder Structure
 
 ```
@@ -77,21 +75,27 @@ rails new appname \
 │   │   └── rails-logo.svg
 │   ├── js
 │   │   └── application.js
-│   └── packs
-│       └── application.js
+│   ├── packs
+│   │   └── application.js
+│   └── react
+│       ├── application.js
+│       └── Greeter.js
 ├── jobs
 └── mailers
 ```
 
-### Initial React Setup (TODO)
+### Initial React Setup
 
-- remount
-- tests
+- Added packages:
+  - react
+  - react-dom
+  - babel-preset-react
+  - remount
+- Working greeter component
 
 ### Essential packages
 
 - sanitize.css
-- remount (TODO)
 
 ### Rspec Test Suite
 
