@@ -12,7 +12,7 @@ def minimum_version_met?(current, expected)
   (version(current) <=> version(expected)) >= 0
 end
 
-def check_requirements
+def check_version_requirements
   unless minimum_version_met? RUBY_VERSION, MINIMUM_RUBY_VERSION
     abort("Aborted! Required ruby version >=#{MINIMUM_RUBY_VERSION}.")
   end
@@ -238,7 +238,7 @@ def initial_lint_fixes
   git commit: "-a -m 'Initial lint fixes'"
 end
 
-check_requirements
+check_version_requirements
 add_template_repository_to_source_path
 
 setup_tooling
