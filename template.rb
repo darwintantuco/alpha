@@ -46,9 +46,8 @@ def add_template_repository_to_source_path
   end
 end
 
-def setup_tooling
+def copy_tool_versions
   copy_file '.tool-versions', '.tool-versions'
-  copy_file 'Procfile', 'Procfile' if options[:webpack]
 end
 
 def add_essential_gems
@@ -241,7 +240,7 @@ end
 check_version_requirements
 add_template_repository_to_source_path
 
-setup_tooling
+copy_tool_versions if args.include? '--asdf'
 
 add_essential_gems
 setup_homepage_template

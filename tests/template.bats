@@ -27,6 +27,9 @@ teardown() {
   # no webpacker setup
   refute [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
 
+  # no asdf
+  refute [ -e "$WORKSPACE/appname/.tool-versions" ]
+
   # no essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_failure
@@ -36,19 +39,20 @@ teardown() {
   run rails new appname \
     --database=postgresql \
     --skip-test \
-    --skip-sprockets \
     --skip-turbolinks \
     --skip-coffee \
-    --skip-javascript \
+    --asdf true \
     --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
-
 
   # exit code 0
   assert_success
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
+
+  # asdf
+  assert [ -e "$WORKSPACE/appname/.tool-versions" ]
 
   # essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"

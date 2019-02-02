@@ -19,7 +19,6 @@ Changes are made by injecting code snippets to generated files.
 - Docker Setup (TODO)
 - Circleci Integration (TODO)
 - Semaphore Integration (TODO)
-- Heroku Deploy Script (TODO)
 
 ## Getting Started
 
@@ -48,10 +47,9 @@ rails new appname \
 rails new appname \
   --database=postgresql \
   --skip-test \
-  --skip-sprockets \
   --skip-turbolinks \
   --skip-coffee \
-  --skip-javascript \
+  --asdf \
   --webpack \
   -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
@@ -60,8 +58,8 @@ rails new appname \
 
 |     Flag     | Description |
 | :----------: | :---------: |
-|   --docker   |             |
 |    --asdf    |             |
+|   --docker   |             |
 |  --circleci  |             |
 | --semaphore  |             |
 | --typescript |             |
@@ -144,8 +142,6 @@ Includes rspec and other gems useful in testing.
 |    yarn run lint:ci     | rubocop eslint stylelint prettier-eslint |
 
 ### Docker Setup (TODO)
-
-### Heroku Deploy Script (TODO)
 
 ### Circleci Integration (TODO)
 
