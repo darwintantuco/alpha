@@ -102,26 +102,30 @@ Working greeter component using remount
 
 ### Rspec Test Suite
 
-- Includes rspec and other gems useful in testing.
+- Preconfigured with rspec and other gems useful in testing.
+- Working rspec examples with js
 
-|           Gem            | Description |
-| :----------------------: | :---------: |
-|    factory_bot_rails     |             |
-| rails-controller-testing |             |
-|       rspec-rails        |             |
-|         rubocop          |             |
-|      rubocop-rspec       |             |
-|         capybara         |             |
-|   chromedriver-helper    |             |
-|     database_cleaner     |             |
-|          faker           |             |
-|    selenium-webdriver    |             |
+|           Gem            |             Description             |
+| :----------------------: | :---------------------------------: |
+|       rspec-rails        |       rspec wrapper for rails       |
+|    factory_bot_rails     |              fixtures               |
+| rails-controller-testing |       for controller testing        |
+|         capybara         |     testing users' interaction      |
+|    selenium-webdriver    | default driver for javascript tests |
+|     database_cleaner     |  ensure a clean state for testing   |
+|          faker           |         generate fake data          |
+|      rubocop-rspec       |       rspec-specific analysis       |
 
 ### Preconfigured Linters
 
 Comes with initial config, can be updated to your preference!
 
 #### Rubocop
+
+Added gems:
+
+- rubocop
+- rubocop-rspec
 
 Initial `rubocop_todo.yml` is generated.
 

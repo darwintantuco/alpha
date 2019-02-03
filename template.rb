@@ -75,7 +75,6 @@ def add_essential_gems
 
   gem_group :test do
     gem 'capybara'
-    gem 'chromedriver-helper'
     gem 'database_cleaner'
     gem 'faker'
     gem 'selenium-webdriver'
@@ -238,6 +237,18 @@ def initial_commit
   git commit: "-a -m 'Initial commit'"
 end
 
+def rspec_test_suite
+  # fixes intermittent failures in rspec generator
+  run 'bundle exec spring stop'
+  run 'bundle exec spring binstub --all'
+  run 'bundle exec rails generate rspec:install'
+
+  add_rspec_examples
+
+  git add: '.'
+  git commit: "-a -m 'Setup rspec test suite'"
+end
+
 def generate_rubocop_todo
   run 'rubocop --auto-gen-config'
   git add: '.'
@@ -285,15 +296,7 @@ after_bundle do
     setup_react
   end
 
-  # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
-  add_rspec_examples
-
-  git add: '.'
-  git commit: "-a -m 'Setup rspec'"
-
+  rspec_test_suite
   generate_rubocop_todo
   initial_lint_fixes
 end
