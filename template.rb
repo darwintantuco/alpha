@@ -232,14 +232,31 @@ def add_rspec_examples
   copy_file 'spec/features/visitor_sees_homepage_spec.rb', 'spec/features/visitor_sees_homepage_spec.rb'
 end
 
-def config_headless_chrome
+def configure_headless_chrome
   inject_into_file 'spec/rails_helper.rb', after: '# config.filter_gems_from_backtrace("gem name")' do
     <<~EOS.chomp
-    \nCapybara.register_driver :selenium do |app|
+    \n  Capybara.register_driver :selenium do |app|
         Capybara::Selenium::Driver.new(app, browser: :chrome)
       end
 
       Capybara.javascript_driver = :selenium_chrome_headless
+    EOS
+  end
+end
+
+def configure_database_cleaner
+  inject_into_file 'spec/rails_helper.rb', after: 'Capybara.javascript_driver = :selenium_chrome_headless' do
+    <<~EOS.chomp
+    \n\n  config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.around(:each) do |example|
+      DatabaseCleaner.cleaning do
+        example.run
+      end
+    end
     EOS
   end
 end
@@ -257,7 +274,8 @@ def rspec_test_suite
   run 'bundle exec rails generate rspec:install'
 
   add_rspec_examples
-  config_headless_chrome
+  configure_headless_chrome
+  configure_database_cleaner
 
   git add: '.'
   git commit: "-a -m 'Setup rspec test suite'"
