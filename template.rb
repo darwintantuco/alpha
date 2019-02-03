@@ -1,8 +1,10 @@
 require 'fileutils'
 require 'shellwords'
+require 'pry'
 
 MINIMUM_RUBY_VERSION = '2.6.0'
 MINIMUM_RAILS_VERSION = '5.2.0'
+MINIMUM_NODE_VERSION = '10.15.1'
 
 def version(version)
   Gem::Version.create(version)
@@ -12,13 +14,23 @@ def minimum_version_met?(current, expected)
   (version(current) <=> version(expected)) >= 0
 end
 
-def check_requirements
+def node_version
+  node = run 'node -v', capture: true
+  abort ("Aborted! node > v#{MINIMUM_NODE_VERSION} is required.") unless node
+  node.chomp[1..-1]
+end
+
+def check_version_requirements
   unless minimum_version_met? RUBY_VERSION, MINIMUM_RUBY_VERSION
     abort("Aborted! Required ruby version >=#{MINIMUM_RUBY_VERSION}.")
   end
 
   unless minimum_version_met? Rails.version, MINIMUM_RAILS_VERSION
     abort("Aborted! Required rails version >=#{MINIMUM_RAILS_VERSION}.")
+  end
+
+  unless minimum_version_met? node_version, MINIMUM_NODE_VERSION
+    abort("Aborted! Required node version >=#{MINIMUM_NODE_VERSION}.")
   end
 end
 
@@ -46,9 +58,8 @@ def add_template_repository_to_source_path
   end
 end
 
-def setup_tooling
+def copy_tool_versions
   copy_file '.tool-versions', '.tool-versions'
-  copy_file 'Procfile', 'Procfile' if options[:webpack]
 end
 
 def add_essential_gems
@@ -80,6 +91,15 @@ def setup_homepage_template
 
   # views
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+end
+
+def generate_tool_versions
+  create_file ".tool_versions" do
+    <<~EOS
+    ruby #{RUBY_VERSION}
+    nodejs #{node_version}
+    EOS
+  end
 end
 
 def insert_yarn_scripts
@@ -212,10 +232,53 @@ def add_rspec_examples
   copy_file 'spec/features/visitor_sees_homepage_spec.rb', 'spec/features/visitor_sees_homepage_spec.rb'
 end
 
+def configure_headless_chrome
+  inject_into_file 'spec/rails_helper.rb', after: '# config.filter_gems_from_backtrace("gem name")' do
+    <<~EOS.chomp
+    \n  Capybara.register_driver :selenium do |app|
+        Capybara::Selenium::Driver.new(app, browser: :chrome)
+      end
+
+      Capybara.javascript_driver = :selenium_chrome_headless
+    EOS
+  end
+end
+
+def configure_database_cleaner
+  inject_into_file 'spec/rails_helper.rb', after: 'Capybara.javascript_driver = :selenium_chrome_headless' do
+    <<~EOS.chomp
+    \n\n  config.before(:suite) do
+        DatabaseCleaner.strategy = :transaction
+        DatabaseCleaner.clean_with(:truncation)
+      end
+
+      config.around(:each) do |example|
+        DatabaseCleaner.cleaning do
+          example.run
+        end
+      end
+    EOS
+  end
+end
+
 def initial_commit
   git :init
   git add: '.'
   git commit: "-a -m 'Initial commit'"
+end
+
+def rspec_test_suite
+  # fixes intermittent failures in rspec generator
+  run 'bundle exec spring stop'
+  run 'bundle exec spring binstub --all'
+  run 'bundle exec rails generate rspec:install'
+
+  add_rspec_examples
+  configure_headless_chrome
+  configure_database_cleaner
+
+  git add: '.'
+  git commit: "-a -m 'Setup rspec test suite'"
 end
 
 def generate_rubocop_todo
@@ -238,14 +301,14 @@ def initial_lint_fixes
   git commit: "-a -m 'Initial lint fixes'"
 end
 
-check_requirements
+check_version_requirements
 add_template_repository_to_source_path
-
-setup_tooling
 
 add_essential_gems
 setup_homepage_template
 initial_commit
+
+generate_tool_versions if args.include? '--asdf'
 
 add_essential_packages if options['webpack']
 add_linter_packages
@@ -265,15 +328,7 @@ after_bundle do
     setup_react
   end
 
-  # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
-  add_rspec_examples
-
-  git add: '.'
-  git commit: "-a -m 'Setup rspec'"
-
+  rspec_test_suite
   generate_rubocop_todo
   initial_lint_fixes
 end
