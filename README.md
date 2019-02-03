@@ -22,7 +22,7 @@ Changes are made by injecting code snippets to generated files.
 
 - ruby >= 2.6.0
 - rails >= 5.2
-- nodejs
+- nodejs >= 10.15.1
 - yarn
 
 ### Optional

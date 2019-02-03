@@ -1,8 +1,10 @@
 require 'fileutils'
 require 'shellwords'
+require 'pry'
 
 MINIMUM_RUBY_VERSION = '2.6.0'
 MINIMUM_RAILS_VERSION = '5.2.0'
+MINIMUM_NODE_VERSION = '10.15.1'
 
 def version(version)
   Gem::Version.create(version)
@@ -12,6 +14,12 @@ def minimum_version_met?(current, expected)
   (version(current) <=> version(expected)) >= 0
 end
 
+def node_version
+  node = run 'node -v', capture: true
+  abort ("Aborted! node > v#{MINIMUM_NODE_VERSION} is required.") unless node
+  node.chomp[1..-1]
+end
+
 def check_version_requirements
   unless minimum_version_met? RUBY_VERSION, MINIMUM_RUBY_VERSION
     abort("Aborted! Required ruby version >=#{MINIMUM_RUBY_VERSION}.")
@@ -19,6 +27,10 @@ def check_version_requirements
 
   unless minimum_version_met? Rails.version, MINIMUM_RAILS_VERSION
     abort("Aborted! Required rails version >=#{MINIMUM_RAILS_VERSION}.")
+  end
+
+  unless minimum_version_met? node_version, MINIMUM_NODE_VERSION
+    abort("Aborted! Required node version >=#{MINIMUM_NODE_VERSION}.")
   end
 end
 
@@ -79,6 +91,15 @@ def setup_homepage_template
 
   # views
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+end
+
+def generate_tool_versions
+  create_file ".tool_versions" do
+    <<~EOS
+    ruby #{RUBY_VERSION}
+    nodejs #{node_version}
+    EOS
+  end
 end
 
 def insert_yarn_scripts
@@ -240,11 +261,11 @@ end
 check_version_requirements
 add_template_repository_to_source_path
 
-copy_tool_versions if args.include? '--asdf'
-
 add_essential_gems
 setup_homepage_template
 initial_commit
+
+generate_tool_versions if args.include? '--asdf'
 
 add_essential_packages if options['webpack']
 add_linter_packages
