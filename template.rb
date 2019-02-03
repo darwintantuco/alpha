@@ -233,7 +233,7 @@ def add_rspec_examples
 end
 
 def config_headless_chrome
-  inject_into_file 'spec/rails_helper', after: '# config.filter_gems_from_backtrace("gem name")' do
+  inject_into_file 'spec/rails_helper.rb', after: '# config.filter_gems_from_backtrace("gem name")' do
     <<~EOS.chomp
     \nCapybara.register_driver :selenium do |app|
         Capybara::Selenium::Driver.new(app, browser: :chrome)

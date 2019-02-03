@@ -102,7 +102,8 @@ Working greeter component using remount
 
 ### Rspec Test Suite
 
-- Preconfigured with rspec and other gems useful in testing.
+- Includes rspec and other gems useful in testing.
+- Preconfigured with headless chromedriver
 - Working rspec examples with js
 
 |           Gem            |             Description             |
