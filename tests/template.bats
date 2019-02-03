@@ -7,7 +7,6 @@ WORKSPACE=$(mktemp -d)
 
 setup() {
   cd $WORKSPACE
-
 }
 
 teardown() {

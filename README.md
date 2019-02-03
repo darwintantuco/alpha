@@ -15,6 +15,7 @@ Changes are made by injecting code snippets to generated files.
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
 - Preconfigured Linters
+- Yarn scripts
 
 ## Getting Started
 
@@ -51,9 +52,9 @@ rails new appname \
 
 #### Custom Flags
 
-|  Flag  | Description |
-| :----: | :---------: |
-| --asdf |             |
+|  Flag  |        Description         |
+| :----: | :------------------------: |
+| --asdf | generates `.tool_versions` |
 
 ### Webpacker Setup
 
@@ -86,20 +87,22 @@ rails new appname \
 
 ### React
 
-- Added packages:
-  - react
-  - react-dom
-  - babel-preset-react
-  - remount
-- Working greeter component
+Added packages:
+
+- react
+- react-dom
+- babel-preset-react
+- remount
+
+Working greeter component using remount
 
 ### Essential packages
 
-- sanitize.css
+- [sanitize.css](https://github.com/csstools/sanitize.css) as css resets
 
 ### Rspec Test Suite
 
-Includes rspec and other gems useful in testing.
+- Includes rspec and other gems useful in testing.
 
 |           Gem            | Description |
 | :----------------------: | :---------: |
@@ -116,10 +119,101 @@ Includes rspec and other gems useful in testing.
 
 ### Preconfigured Linters
 
-- Rubocop
-- Eslint
-- Prettier
-- Stylelint
+Comes with initial config, can be updated to your preference!
+
+#### Rubocop
+
+Initial `rubocop_todo.yml` is generated.
+
+```
+# .rubocop.yml
+inherit_from: .rubocop_todo.yml
+require: rubocop-rspec
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/BlockAlignment:
+  Enabled: false
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'bin/*'
+  TargetRubyVersion: 2.6.0
+```
+
+#### Eslint
+
+Added packages:
+
+- babel-eslint
+- eslint-plugin-flowtype
+
+```
+# .eslintrc
+{
+  "extends": [
+    "standard",
+    "standard-jsx"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype"
+  ]
+}
+```
+
+#### Prettier
+
+Added packages:
+
+- prettier-eslint-cli
+
+#### Stylelint
+
+Added packages:
+
+- stylelint
+- stylelint-8-point-grid
+- stylelint-config-standard
+- stylelint-rscss
+
+```
+# .stylelintrc
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-rscss/config",
+    "stylelint-8-point-grid"
+  ],
+  rules: {
+    "plugin/8-point-grid": {
+      "base": 8,
+      "whitelist": ["4px", "2px", "1px"]
+    }
+  }
+}
+```
 
 ### Yarn Scripts
 
