@@ -1,5 +1,7 @@
 language: ruby
 rvm:
   - ruby 2.6.0
+before_install:
+  - nvm install node
 install: gem install rails
 script: yarn && yarn test
