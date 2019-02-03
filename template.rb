@@ -248,15 +248,15 @@ def configure_database_cleaner
   inject_into_file 'spec/rails_helper.rb', after: 'Capybara.javascript_driver = :selenium_chrome_headless' do
     <<~EOS.chomp
     \n\n  config.before(:suite) do
-      DatabaseCleaner.strategy = :transaction
-      DatabaseCleaner.clean_with(:truncation)
-    end
-
-    config.around(:each) do |example|
-      DatabaseCleaner.cleaning do
-        example.run
+        DatabaseCleaner.strategy = :transaction
+        DatabaseCleaner.clean_with(:truncation)
       end
-    end
+
+      config.around(:each) do |example|
+        DatabaseCleaner.cleaning do
+          example.run
+        end
+      end
     EOS
   end
 end
