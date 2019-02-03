@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Visitor sees homepage", type: :feature do
+describe "Visitor sees homepage", type: :feature, js: true do
   it "displays welcome text" do
     visit root_path
 

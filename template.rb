@@ -75,6 +75,7 @@ def add_essential_gems
 
   gem_group :test do
     gem 'capybara'
+    gem 'chromedriver-helper'
     gem 'database_cleaner'
     gem 'faker'
     gem 'selenium-webdriver'
@@ -231,6 +232,18 @@ def add_rspec_examples
   copy_file 'spec/features/visitor_sees_homepage_spec.rb', 'spec/features/visitor_sees_homepage_spec.rb'
 end
 
+def config_headless_chrome
+  inject_into_file 'spec/rails_helper', after: '# config.filter_gems_from_backtrace("gem name")' do
+    <<~EOS.chomp
+    \nCapybara.register_driver :selenium do |app|
+        Capybara::Selenium::Driver.new(app, browser: :chrome)
+      end
+
+      Capybara.javascript_driver = :selenium_chrome_headless
+    EOS
+  end
+end
+
 def initial_commit
   git :init
   git add: '.'
@@ -244,6 +257,7 @@ def rspec_test_suite
   run 'bundle exec rails generate rspec:install'
 
   add_rspec_examples
+  config_headless_chrome
 
   git add: '.'
   git commit: "-a -m 'Setup rspec test suite'"

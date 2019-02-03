@@ -32,6 +32,10 @@ teardown() {
   # no essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_failure
+
+  # rspec passes
+  run rspec
+  assert_success
 }
 
 @test 'Recommended Usage' {
@@ -55,5 +59,9 @@ teardown() {
 
   # essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
+  assert_success
+
+  # rspec passes
+  run rspec
   assert_success
 }
