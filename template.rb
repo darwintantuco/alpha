@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'shellwords'
-require 'pry'
 
 MINIMUM_RUBY_VERSION = '2.6.0'
 MINIMUM_RAILS_VERSION = '5.2.0'
