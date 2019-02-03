@@ -17,11 +17,8 @@ teardown() {
 }
 
 @test 'Basic Usage' {
-  run rails new appname \
+  rails new appname \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
-
-  # exit code 0
-  assert_success
 
   # no webpacker setup
   refute [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
@@ -39,17 +36,14 @@ teardown() {
 }
 
 @test 'Recommended Usage' {
-  run rails new appname \
+  rails new appname \
     --database=postgresql \
     --skip-test \
     --skip-turbolinks \
     --skip-coffee \
-    --asdf true \
+    --asdf \
     --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
-
-  # exit code 0
-  assert_success
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]

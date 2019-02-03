@@ -57,10 +57,6 @@ def add_template_repository_to_source_path
   end
 end
 
-def copy_tool_versions
-  copy_file '.tool-versions', '.tool-versions'
-end
-
 def add_essential_gems
   gem 'hamlit-rails'
 
@@ -93,7 +89,7 @@ def setup_homepage_template
 end
 
 def generate_tool_versions
-  create_file ".tool_versions" do
+  create_file ".tool-versions" do
     <<~EOS
     ruby #{RUBY_VERSION}
     nodejs #{node_version}
