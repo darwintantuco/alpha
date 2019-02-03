@@ -15,10 +15,6 @@ Changes are made by injecting code snippets to generated files.
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
 - Preconfigured Linters
-- Typescript (TODO)
-- Docker Setup (TODO)
-- Circleci Integration (TODO)
-- Semaphore Integration (TODO)
 
 ## Getting Started
 
@@ -31,7 +27,6 @@ Changes are made by injecting code snippets to generated files.
 
 ### Optional
 
-- docker
 - asdf
 
 ### Basic Usage
@@ -56,13 +51,9 @@ rails new appname \
 
 #### Custom Flags
 
-|     Flag     | Description |
-| :----------: | :---------: |
-|    --asdf    |             |
-|   --docker   |             |
-|  --circleci  |             |
-| --semaphore  |             |
-| --typescript |             |
+|  Flag  | Description |
+| :----: | :---------: |
+| --asdf |             |
 
 ### Webpacker Setup
 
@@ -140,12 +131,6 @@ Includes rspec and other gems useful in testing.
 | yarn run prettier:check |             prettier-eslint              |
 |  yarn run prettier:fix  |             prettier-eslint              |
 |    yarn run lint:ci     | rubocop eslint stylelint prettier-eslint |
-
-### Docker Setup (TODO)
-
-### Circleci Integration (TODO)
-
-### Semaphore Integration (TODO)
 
 ## Post Install Guide
 
