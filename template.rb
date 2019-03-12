@@ -135,7 +135,7 @@ def setup_react
     react-dom'
 
   inject_into_file 'babel.config.js',
-    after: '"presets": [' do
+    after: 'presets: [' do
     <<~EOS.chomp
     \n      [require('@babel/preset-react')],
     EOS
