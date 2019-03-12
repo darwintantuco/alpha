@@ -75,6 +75,9 @@ def add_essential_gems
     gem 'faker'
     gem 'selenium-webdriver'
   end
+
+  git add: '.'
+  git commit: "-a -m 'Add essential gems'"
 end
 
 def setup_homepage_template
@@ -86,6 +89,9 @@ def setup_homepage_template
 
   # views
   copy_file 'app/views/home/index.html.erb', 'app/views/home/index.html.erb'
+
+  git add: '.'
+  git commit: "-a -m 'Setup homepage template'"
 end
 
 def generate_tool_versions
@@ -95,6 +101,8 @@ def generate_tool_versions
     nodejs #{node_version}
     EOS
   end
+  git add: '.'
+  git commit: "-a -m 'Generate .tool_versions'"
 end
 
 def insert_yarn_scripts
@@ -114,6 +122,9 @@ end
 
 def add_essential_packages
   run 'yarn add sanitize.css'
+
+  git add: '.'
+  git commit: "-a -m 'Add essential packages'"
 end
 
 def setup_react
@@ -156,6 +167,9 @@ def copy_linter_files
   copy_file '.rubocop.yml', '.rubocop.yml'
   copy_file '.eslintrc', '.eslintrc'
   copy_file '.stylelintrc', '.stylelintrc'
+
+  git add: '.'
+  git commit: "-a -m 'Initial linter configs'"
 end
 
 def initial_webpack_assets
@@ -299,9 +313,9 @@ end
 check_version_requirements
 add_template_repository_to_source_path
 
+initial_commit
 add_essential_gems
 setup_homepage_template
-initial_commit
 
 generate_tool_versions if args.include? '--asdf'
 
