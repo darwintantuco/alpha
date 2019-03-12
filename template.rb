@@ -118,15 +118,15 @@ end
 
 def setup_react
   run 'yarn add \
-    babel-preset-react \
+    @babel/preset-react \
     remount \
     react \
     react-dom'
 
-  inject_into_file '.babelrc',
+  inject_into_file 'babel.config.js',
     after: '"presets": [' do
     <<~EOS.chomp
-    \n    "react",
+    \n      [require('@babel/preset-react')],
     EOS
   end
 
