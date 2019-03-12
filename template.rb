@@ -215,7 +215,7 @@ def initial_webpack_assets
   # render sample icon
   inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
     <<~EOS.chomp
-    \n  <%= image_tag asset_pack_path('images/rails-logo.svg'), class: 'logo' %>
+    \n  <%= image_tag asset_pack_path('media/images/rails-logo.svg'), class: 'logo' %>
     EOS
   end
 
