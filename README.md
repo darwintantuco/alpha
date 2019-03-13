@@ -10,12 +10,11 @@ Changes are made by injecting code snippets to generated files.
 
 ## tl;dr
 
-- Webpacker Setup with React
-- Essential yarn packages
+- Working react greeter component using [remount](https://github.com/rstacruz/remount)
+- [sanitize.css](https://github.com/csstools/sanitize.css)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
-- Preconfigured Linters
-- Yarn scripts
+- Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
 
 ## Getting Started
 
@@ -94,7 +93,7 @@ Added packages:
 - babel-preset-react
 - remount
 
-Working greeter component using remount
+Working greeter component using [remount](https://github.com/rstacruz/remount)
 
 ### Essential packages
 
@@ -175,8 +174,8 @@ Added packages:
 - babel-eslint
 - eslint-plugin-flowtype
 
-```
-# .eslintrc
+```js
+// .eslintrc
 {
   "extends": [
     "standard",
@@ -193,7 +192,16 @@ Added packages:
 
 Added packages:
 
-- prettier-eslint-cli
+- prettier
+
+```js
+// .prettierrc
+{
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true
+}
+```
 
 #### Stylelint
 
@@ -204,8 +212,8 @@ Added packages:
 - stylelint-config-standard
 - stylelint-rscss
 
-```
-# .stylelintrc
+```js
+// .stylelintrc
 {
   "extends": [
     "stylelint-config-standard",

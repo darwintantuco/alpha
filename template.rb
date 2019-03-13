@@ -112,8 +112,8 @@ def insert_yarn_scripts
         "lint:ruby": "rubocop --require rubocop-rspec",
         "lint:js": "eslint \\"./app/**/*.{js,jsx}\\"",
         "lint:css": "stylelint \\"./app/**/*.scss\\"",
-        "prettier:check": "prettier-eslint --list-different \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
-        "prettier:fix": "prettier-eslint --write \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
+        "prettier:check": "prettier --list-different \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
+        "prettier:fix": "prettier --write \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
         "lint:ci": "run-s lint:ruby lint:js lint:css prettier:check"
       },
     EOS
@@ -168,7 +168,7 @@ def add_linter_packages
     stylelint-config-standard \
     stylelint-rscss \
     stylelint-8-point-grid \
-    prettier-eslint-cli \
+    prettier \
     standard \
     babel-eslint \
     eslint-plugin-flowtype \
@@ -184,6 +184,7 @@ def copy_linter_files
   copy_file '.rubocop.yml', '.rubocop.yml'
   copy_file '.eslintrc', '.eslintrc'
   copy_file '.stylelintrc', '.stylelintrc'
+  copy_file '.prettierrc', '.prettierrc'
 
   git add: '.'
   git commit: "-a -m 'Initial linter configs'"

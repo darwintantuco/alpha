@@ -1,6 +1,8 @@
 language: ruby
 rvm:
   - ruby 2.6.0
+addons:
+  chrome: stable
 before_install:
   - nvm install node
 install: gem install rails
