@@ -175,8 +175,8 @@ Added packages:
 - babel-eslint
 - eslint-plugin-flowtype
 
-```
-# .eslintrc
+```js
+// .eslintrc
 {
   "extends": [
     "standard",
@@ -193,7 +193,16 @@ Added packages:
 
 Added packages:
 
-- prettier-eslint-cli
+- prettier
+
+```js
+// .prettierrc
+{
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true
+}
+```
 
 #### Stylelint
 
@@ -204,8 +213,8 @@ Added packages:
 - stylelint-config-standard
 - stylelint-rscss
 
-```
-# .stylelintrc
+```js
+// .stylelintrc
 {
   "extends": [
     "stylelint-config-standard",
