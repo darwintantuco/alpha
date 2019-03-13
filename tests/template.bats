@@ -17,6 +17,7 @@ teardown() {
 }
 
 @test 'Basic Usage' {
+  # exit 0
   rails new appname \
     --database=postgresql \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
@@ -31,12 +32,15 @@ teardown() {
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_failure
 
+  cd appname
+
   # rspec passes
   run rspec
   assert_success
 }
 
 @test 'Recommended Usage' {
+  # exit 0
   rails new appname \
     --database=postgresql \
     --skip-test \
@@ -56,7 +60,13 @@ teardown() {
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_success
 
+  cd appname
+
   # rspec passes
   run rspec
+  assert_success
+
+  # prettier passes
+  run yarn run prettier:check
   assert_success
 }
