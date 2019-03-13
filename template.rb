@@ -127,6 +127,23 @@ def add_essential_packages
   git commit: "-a -m 'Add essential packages'"
 end
 
+def webpacker_esm_mjs_fixes
+  inject_into_file 'config/webpack/environment.js',
+    after: "require('@rails/webpacker')" do
+    <<~EOS.chomp
+    \nconst customConfig = require('./custom')
+    \n
+    \nenvironment.config.merge(customConfig)
+    EOS
+  end
+
+  copy_file 'config/webpack/custom.js', 'config/webpack/custom.js'
+
+
+  git add: '.'
+  git commit: "-a -m 'Fix .esm.mjs issue in webpacker'"
+end
+
 def setup_react
   run 'yarn add \
     @babel/preset-react \
@@ -335,6 +352,7 @@ after_bundle do
 
     initial_webpack_assets
     setup_react
+    webpacker_esm_mjs_fixes
   end
 
   rspec_test_suite
