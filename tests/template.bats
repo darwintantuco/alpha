@@ -18,6 +18,7 @@ teardown() {
 
 @test 'Basic Usage' {
   rails new appname \
+    --database=postgresql \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
   # no webpacker setup
