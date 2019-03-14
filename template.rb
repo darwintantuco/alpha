@@ -132,8 +132,7 @@ def webpacker_esm_mjs_fixes
     after: "require('@rails/webpacker')" do
     <<~EOS.chomp
     \nconst customConfig = require('./custom')
-    \n
-    \nenvironment.config.merge(customConfig)
+    environment.config.merge(customConfig)
     EOS
   end
 
