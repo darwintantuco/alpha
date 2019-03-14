@@ -33,6 +33,7 @@ Changes are made by injecting code snippets to generated files.
 
 ```
 rails new appname \
+  --database=postgresql \
   -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
@@ -231,14 +232,14 @@ Added packages:
 
 ### Yarn Scripts
 
-|         Command         |               Description                |
-| :---------------------: | :--------------------------------------: |
-|   yarn run lint:ruby    |                 rubocop                  |
-|    yarn run lint:js     |                  eslint                  |
-|    yarn run lint:css    |                stylelint                 |
-| yarn run prettier:check |             prettier-eslint              |
-|  yarn run prettier:fix  |             prettier-eslint              |
-|    yarn run lint:ci     | rubocop eslint stylelint prettier-eslint |
+|         Command         |            Description            |
+| :---------------------: | :-------------------------------: |
+|   yarn run lint:ruby    |              rubocop              |
+|    yarn run lint:js     |              eslint               |
+|    yarn run lint:css    |             stylelint             |
+| yarn run prettier:check |             prettier              |
+|  yarn run prettier:fix  |             prettier              |
+|    yarn run lint:ci     | rubocop eslint stylelint prettier |
 
 ## Post Install Guide
 

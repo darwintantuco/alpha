@@ -66,7 +66,7 @@ teardown() {
   run rspec
   assert_success
 
-  # prettier passes
-  run yarn run prettier:check
+  # linter works
+  run yarn run lint:ci
   assert_success
 }
