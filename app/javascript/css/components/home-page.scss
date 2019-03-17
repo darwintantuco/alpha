@@ -1,3 +1,5 @@
+@import '../mixins/mixins';
+
 .home-page {
   > .logo {
     width: 240px;
@@ -5,5 +7,6 @@
 
   > .note {
     color: red;
+    @include font-size(11);
   }
 }

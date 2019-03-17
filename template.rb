@@ -121,7 +121,7 @@ def insert_yarn_scripts
 end
 
 def add_essential_packages
-  run 'yarn add sanitize.css'
+  run 'yarn add sanitize.css modularscale-sass'
 
   git add: '.'
   git commit: "-a -m 'Add essential packages'"
@@ -132,8 +132,7 @@ def webpacker_esm_mjs_fixes
     after: "require('@rails/webpacker')" do
     <<~EOS.chomp
     \nconst customConfig = require('./custom')
-    \n
-    \nenvironment.config.merge(customConfig)
+    environment.config.merge(customConfig)
     EOS
   end
 
@@ -195,6 +194,8 @@ def initial_webpack_assets
   copy_file 'app/javascript/css/application.scss', 'app/javascript/css/application.scss'
   copy_file 'app/javascript/css/vendor.scss', 'app/javascript/css/vendor.scss'
   copy_file 'app/javascript/css/components/home-page.scss', 'app/javascript/css/components/home-page.scss'
+  copy_file 'app/javascript/css/base.scss', 'app/javascript/css/base.scss'
+  copy_file 'app/javascript/css/mixins/_mixins.scss', 'app/javascript/css/mixins/_mixins.scss'
 
   # images
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
@@ -213,7 +214,6 @@ def initial_webpack_assets
     <<~EOS.chomp
     \nimport "../images/application";
 
-    import "../css/vendor";
     import "../css/application";
 
     import "../js/application";

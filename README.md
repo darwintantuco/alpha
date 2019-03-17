@@ -10,8 +10,8 @@ Changes are made by injecting code snippets to generated files.
 
 ## tl;dr
 
-- Working react greeter component using [remount](https://github.com/rstacruz/remount)
-- [sanitize.css](https://github.com/csstools/sanitize.css)
+- Working react component using [remount](https://github.com/rstacruz/remount)
+- [sanitize.css](https://github.com/csstools/sanitize.css), [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
 - Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
@@ -94,11 +94,10 @@ Added packages:
 - babel-preset-react
 - remount
 
-Working greeter component using [remount](https://github.com/rstacruz/remount)
-
 ### Essential packages
 
 - [sanitize.css](https://github.com/csstools/sanitize.css) as css resets
+- [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 
 ### Rspec Test Suite
 
