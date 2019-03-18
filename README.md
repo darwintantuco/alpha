@@ -220,11 +220,13 @@ Added packages:
     "stylelint-rscss/config",
     "stylelint-8-point-grid"
   ],
-  rules: {
+  "rules": {
     "plugin/8-point-grid": {
       "base": 8,
       "whitelist": ["4px", "2px", "1px"]
-    }
+    },
+    "at-rule-no-unknown": null,
+    "at-rule-empty-line-before": null
   }
 }
 ```
