@@ -80,8 +80,10 @@ rails new appname \
 │   ├── packs
 │   │   └── application.js
 │   └── react
-│       ├── application.js
-│       └── Greeter.js
+│       ├── components
+│       │   ├── __tests__
+│       │   └── Greeter.js
+│       └── application.js
 ├── jobs
 └── mailers
 ```
@@ -117,6 +119,41 @@ Added packages:
 |     database_cleaner     |  ensure a clean state for testing   |
 |          faker           |         generate fake data          |
 |      rubocop-rspec       |       rspec-specific analysis       |
+
+### Jest and Enzyme
+
+Added packages:
+
+- jest
+- babel-jest
+- enzyme
+- enzyme-adapter-react-16
+- enzyme-to-json
+- react-test-renderer
+
+```js
+// setupTests.js
+
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+configure({ adapter: new Adapter() })
+```
+
+```json
+// package.json
+"jest": {
+  "roots": [
+    "app/assets/javascripts",
+    "app/javascript"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "setupFiles": [
+    "./setupTests.js"
+  ]
+},
+```
 
 ### Preconfigured Linters
 
