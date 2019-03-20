@@ -284,7 +284,7 @@ def setup_jest
     'app/javascript/react/components/__tests__/Greeter.spec.js'
 
   git add: '.'
-  git commit: "-a -m 'Working react tests"
+  git commit: "-a -m 'Working react tests'"
 end
 
 def add_rspec_examples
