@@ -166,7 +166,7 @@ configure({ adapter: new Adapter() })
 
 ### Preconfigured Linters
 
-Comes with initial config, can be updated to your preference!
+Comes with initial config but can be updated to your preference.
 
 #### Rubocop
 
