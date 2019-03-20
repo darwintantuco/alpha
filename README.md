@@ -14,7 +14,7 @@ Changes are made by injecting code snippets to generated files.
 - [sanitize.css](https://github.com/csstools/sanitize.css), [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
-- [jest](https://github.com/facebook/jest), [enzyme](https://github.com/airbnb/enzyme)
+- Javascript Test Suite ([jest](https://github.com/facebook/jest), [enzyme](https://github.com/airbnb/enzyme))
 - Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
 
 ## Getting Started
@@ -133,13 +133,12 @@ Added packages:
 
 ```js
 // setupTests.js
-
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 ```
 
-```json
+```js
 // package.json
 "jest": {
   "roots": [
