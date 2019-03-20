@@ -14,6 +14,7 @@ Changes are made by injecting code snippets to generated files.
 - [sanitize.css](https://github.com/csstools/sanitize.css), [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
+- [jest](https://github.com/facebook/jest), [enzyme](https://github.com/airbnb/enzyme)
 - Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
 
 ## Getting Started
@@ -172,6 +173,7 @@ AllCops:
 Added packages:
 
 - eslint
+- babel-eslint
 - eslint-config-prettier
 - eslint-plugin-react
 
@@ -244,14 +246,15 @@ Added packages:
 
 ### Yarn Scripts
 
-|         Command         |            Description            |
-| :---------------------: | :-------------------------------: |
-|   yarn run lint:ruby    |              rubocop              |
-|    yarn run lint:js     |              eslint               |
-|    yarn run lint:css    |             stylelint             |
-| yarn run prettier:check |             prettier              |
-|  yarn run prettier:fix  |             prettier              |
-|    yarn run lint:ci     | rubocop eslint stylelint prettier |
+|         Command         |               Description               |
+| :---------------------: | :-------------------------------------: |
+|      yarn run test      |                  jest                   |
+|   yarn run lint:ruby    |                 rubocop                 |
+|    yarn run lint:js     |                 eslint                  |
+|    yarn run lint:css    |                stylelint                |
+| yarn run prettier:check |                prettier                 |
+|  yarn run prettier:fix  |                prettier                 |
+|    yarn run lint:ci     | rubocop eslint stylelint prettier:check |
 
 ## Post Install Guide
 
