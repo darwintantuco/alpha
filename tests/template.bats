@@ -73,4 +73,8 @@ teardown() {
   # jest works
   run yarn run test
   assert_success
+
+  # output rails app has no uncommitted changes
+  run yarn run git status
+  assert_output --partial 'nothing to commit'
 }
