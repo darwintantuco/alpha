@@ -18,7 +18,7 @@ Changes are made by injecting code snippets to generated files.
 - Rspec Test Suite
 - Javascript Test Suite
   - [jest](https://github.com/facebook/jest)
-  - [enzyme](https://github.com/airbnb/enzyme))
+  - [enzyme](https://github.com/airbnb/enzyme)
 - Preconfigured Linters
   - Rubocop
   - Prettier
