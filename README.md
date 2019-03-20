@@ -171,20 +171,31 @@ AllCops:
 
 Added packages:
 
-- babel-eslint
-- eslint-plugin-flowtype
+- eslint
+- eslint-config-prettier
+- eslint-plugin-react
 
 ```js
-// .eslintrc
-{
-  "extends": [
-    "standard",
-    "standard-jsx"
+// .eslintrc.js
+module.exports = {
+  plugins: ['react'],
+  parser: 'babel-eslint',
+  env: {
+    jest: true
+  },
+  rules: {
+    'react/prop-types': 0
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'eslint-config-prettier'
   ],
-  "parser": "babel-eslint",
-  "plugins": [
-    "flowtype"
-  ]
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  }
 }
 ```
 

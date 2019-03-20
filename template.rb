@@ -135,9 +135,9 @@ def add_linter_packages
     stylelint-rscss \
     stylelint-8-point-grid \
     prettier \
-    standard \
-    babel-eslint \
-    eslint-plugin-flowtype \
+    eslint \
+    eslint-config-prettier \
+    eslint-plugin-react \
     npm-run-all'
 
   insert_yarn_scripts
@@ -148,7 +148,7 @@ end
 
 def copy_linter_files
   copy_file '.rubocop.yml', '.rubocop.yml'
-  copy_file '.eslintrc', '.eslintrc'
+  copy_file '.eslintrc.js', '.eslintrc.js'
   copy_file '.stylelintrc', '.stylelintrc'
   copy_file '.prettierrc', '.prettierrc'
 
