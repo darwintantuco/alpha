@@ -76,5 +76,5 @@ teardown() {
 
   # output rails app has no uncommitted changes
   run git status
-  assert_output --partial 'nothing to commit'
+  refute_output --partial 'untracked files present'
 }
