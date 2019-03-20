@@ -69,4 +69,8 @@ teardown() {
   # linter works
   run yarn run lint:ci
   assert_success
+
+  # jest works
+  run yarn run test
+  assert_success
 }

@@ -109,6 +109,7 @@ def insert_yarn_scripts
   inject_into_file 'package.json', after: '  "private": true,' do
     <<~EOS.chomp
     \n  "scripts": {
+        "test": "jest",
         "lint:ruby": "rubocop --require rubocop-rspec",
         "lint:js": "eslint \\"./app/**/*.{js,jsx}\\"",
         "lint:css": "stylelint \\"./app/**/*.scss\\"",
