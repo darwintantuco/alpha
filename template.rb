@@ -361,6 +361,14 @@ def initial_lint_fixes
       "\n/* eslint-disable */\n"
     end
   end
+
+  file = 'app/javascript/packs/application.js'
+  if File.file?(file)
+    inject_into_file file, after: "/* eslint no-console:0 */\n" do
+      "\n/* eslint no-undef: 0 */\n"
+    end
+  end
+
   run 'yarn run prettier:fix'
 
   git add: '.'
