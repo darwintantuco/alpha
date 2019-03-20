@@ -127,40 +127,6 @@ def add_essential_packages
   git commit: "-a -m 'Add essential packages'"
 end
 
-def webpacker_esm_mjs_fixes
-  inject_into_file 'config/webpack/environment.js',
-    after: "require('@rails/webpacker')" do
-    <<~EOS.chomp
-    \nconst customConfig = require('./custom')
-    environment.config.merge(customConfig)
-    EOS
-  end
-
-  copy_file 'config/webpack/custom.js', 'config/webpack/custom.js'
-
-
-  git add: '.'
-  git commit: "-a -m 'Fix .esm.mjs issue in webpacker'"
-end
-
-def setup_react
-  run 'yarn add \
-    @babel/preset-react \
-    remount \
-    react \
-    react-dom'
-
-  inject_into_file 'babel.config.js',
-    after: 'presets: [' do
-    <<~EOS.chomp
-    \n      [require('@babel/preset-react')],
-    EOS
-  end
-
-  git add: '.'
-  git commit: "-a -m 'Add react packages'"
-end
-
 def add_linter_packages
   run 'yarn add --dev \
     stylelint \
@@ -206,7 +172,7 @@ def initial_webpack_assets
 
   # react
   copy_file 'app/javascript/react/application.js', 'app/javascript/react/application.js'
-  copy_file 'app/javascript/react/Greeter.js', 'app/javascript/react/Greeter.js'
+  copy_file 'app/javascript/react/components/Greeter.js', 'app/javascript/react/components/Greeter.js'
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
@@ -246,6 +212,77 @@ def initial_webpack_assets
 
   git add: '.'
   git commit: "-a -m 'Initial webpack assets'"
+end
+
+def setup_react
+  run 'yarn add \
+    @babel/preset-react \
+    remount \
+    react \
+    react-dom'
+
+  inject_into_file 'babel.config.js',
+    after: 'presets: [' do
+    <<~EOS.chomp
+    \n      [require('@babel/preset-react')],
+    EOS
+  end
+
+  git add: '.'
+  git commit: "-a -m 'Add react packages'"
+end
+
+def webpacker_esm_mjs_fixes
+  inject_into_file 'config/webpack/environment.js',
+    after: "require('@rails/webpacker')" do
+    <<~EOS.chomp
+    \nconst customConfig = require('./custom')
+    environment.config.merge(customConfig)
+    EOS
+  end
+
+  copy_file 'config/webpack/custom.js', 'config/webpack/custom.js'
+
+  git add: '.'
+  git commit: "-a -m 'Fix .esm.mjs issue in webpacker'"
+end
+
+def setup_jest
+  run 'yarn add --dev \
+    jest \
+    babel-jest \
+    enzyme \
+    enzyme-adapter-react-16 \
+    enzyme-to-json \
+    react-test-renderer'
+
+  copy_file 'setupTests.js', 'setupTests.js'
+
+  inject_into_file 'package.json', after: '  "private": true,' do
+    <<~EOS.chomp
+    \n  "jest": {
+        "roots": [
+          "app/assets/javascripts",
+          "app/javascript"
+        ],
+        "snapshotSerializers": [
+          "enzyme-to-json/serializer"
+        ],
+        "setupFiles": [
+          "./setupTests.js"
+        ]
+      },
+    EOS
+  end
+
+  git add: '.'
+  git commit: "-a -m 'Configure jest and enzyme'"
+
+  copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
+    'app/javascript/react/components/__tests__/Greeter.spec.js'
+
+  git add: '.'
+  git commit: "-a -m 'Working react tests"
 end
 
 def add_rspec_examples
@@ -354,6 +391,7 @@ after_bundle do
     initial_webpack_assets
     setup_react
     webpacker_esm_mjs_fixes
+    setup_jest
   end
 
   rspec_test_suite
