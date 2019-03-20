@@ -280,14 +280,11 @@ def setup_jest
     EOS
   end
 
-  git add: '.'
-  git commit: "-a -m 'Configure jest and enzyme'"
-
   copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
     'app/javascript/react/components/__tests__/Greeter.spec.js'
 
   git add: '.'
-  git commit: "-a -m 'Working react tests'"
+  git commit: "-a -m 'Configure jest and enzyme and working react tests'"
 end
 
 def add_rspec_examples
