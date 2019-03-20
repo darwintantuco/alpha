@@ -14,6 +14,7 @@ Changes are made by injecting code snippets to generated files.
 - [sanitize.css](https://github.com/csstools/sanitize.css), [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
+- [jest](https://github.com/facebook/jest), [enzyme](https://github.com/airbnb/enzyme)
 - Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
 
 ## Getting Started
@@ -79,8 +80,10 @@ rails new appname \
 │   ├── packs
 │   │   └── application.js
 │   └── react
-│       ├── application.js
-│       └── Greeter.js
+│       ├── components
+│       │   ├── __tests__
+│       │   └── Greeter.js
+│       └── application.js
 ├── jobs
 └── mailers
 ```
@@ -116,6 +119,41 @@ Added packages:
 |     database_cleaner     |  ensure a clean state for testing   |
 |          faker           |         generate fake data          |
 |      rubocop-rspec       |       rspec-specific analysis       |
+
+### Jest and Enzyme
+
+Added packages:
+
+- jest
+- babel-jest
+- enzyme
+- enzyme-adapter-react-16
+- enzyme-to-json
+- react-test-renderer
+
+```js
+// setupTests.js
+
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+configure({ adapter: new Adapter() })
+```
+
+```json
+// package.json
+"jest": {
+  "roots": [
+    "app/assets/javascripts",
+    "app/javascript"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "setupFiles": [
+    "./setupTests.js"
+  ]
+},
+```
 
 ### Preconfigured Linters
 
@@ -171,20 +209,32 @@ AllCops:
 
 Added packages:
 
+- eslint
 - babel-eslint
-- eslint-plugin-flowtype
+- eslint-config-prettier
+- eslint-plugin-react
 
 ```js
-// .eslintrc
-{
-  "extends": [
-    "standard",
-    "standard-jsx"
+// .eslintrc.js
+module.exports = {
+  plugins: ['react'],
+  parser: 'babel-eslint',
+  env: {
+    jest: true
+  },
+  rules: {
+    'react/prop-types': 0
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'eslint-config-prettier'
   ],
-  "parser": "babel-eslint",
-  "plugins": [
-    "flowtype"
-  ]
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  }
 }
 ```
 
@@ -233,14 +283,15 @@ Added packages:
 
 ### Yarn Scripts
 
-|         Command         |            Description            |
-| :---------------------: | :-------------------------------: |
-|   yarn run lint:ruby    |              rubocop              |
-|    yarn run lint:js     |              eslint               |
-|    yarn run lint:css    |             stylelint             |
-| yarn run prettier:check |             prettier              |
-|  yarn run prettier:fix  |             prettier              |
-|    yarn run lint:ci     | rubocop eslint stylelint prettier |
+|         Command         |               Description               |
+| :---------------------: | :-------------------------------------: |
+|      yarn run test      |                  jest                   |
+|   yarn run lint:ruby    |                 rubocop                 |
+|    yarn run lint:js     |                 eslint                  |
+|    yarn run lint:css    |                stylelint                |
+| yarn run prettier:check |                prettier                 |
+|  yarn run prettier:fix  |                prettier                 |
+|    yarn run lint:ci     | rubocop eslint stylelint prettier:check |
 
 ## Post Install Guide
 
