@@ -13,19 +13,19 @@ Each change is separated by different commits to easily track any changes made.
 ## tl;dr
 
 - Working react component using [remount](https://github.com/rstacruz/remount)
-- Essential Packages
+- Essential packages
   - [sanitize.css](https://github.com/csstools/sanitize.css)
   - [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
-- Rspec Test Suite
-- Javascript Test Suite
+- Rspec test suite
+- Javascript test suite
   - [jest](https://github.com/facebook/jest)
   - [enzyme](https://github.com/airbnb/enzyme)
-- Preconfigured Linters
-  - Rubocop
-  - Prettier
-  - Eslint
-  - Stylelint
+- Preconfigured linters
+  - [rubocop](https://github.com/rubocop-hq/rubocop)
+  - [prettier](https://github.com/prettier/prettier)
+  - [eslint](https://github.com/eslint/eslint)
+  - [stylelint](https://github.com/stylelint/stylelint)
 
 ## Getting Started
 
