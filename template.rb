@@ -138,6 +138,7 @@ def add_linter_packages
     eslint \
     eslint-config-prettier \
     eslint-plugin-react \
+    babel-eslint \
     npm-run-all'
 
   insert_yarn_scripts
