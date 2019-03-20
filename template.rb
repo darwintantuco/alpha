@@ -119,6 +119,9 @@ def insert_yarn_scripts
       },
     EOS
   end
+
+  git add: '.'
+  git commit: "-a -m 'Add linter scripts'"
 end
 
 def add_essential_packages
