@@ -11,11 +11,19 @@ Changes are made by injecting code snippets to generated files.
 ## tl;dr
 
 - Working react component using [remount](https://github.com/rstacruz/remount)
-- [sanitize.css](https://github.com/csstools/sanitize.css), [modularscale-sass](https://github.com/modularscale/modularscale-sass)
+- Essential Packages
+  - [sanitize.css](https://github.com/csstools/sanitize.css)
+  - [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec Test Suite
-- Javascript Test Suite ([jest](https://github.com/facebook/jest), [enzyme](https://github.com/airbnb/enzyme))
-- Preconfigured Linters (Rubocop, Prettier, Eslint, Stylelint)
+- Javascript Test Suite
+  - [jest](https://github.com/facebook/jest)
+  - [enzyme](https://github.com/airbnb/enzyme))
+- Preconfigured Linters
+  - Rubocop
+  - Prettier
+  - Eslint
+  - Stylelint
 
 ## Getting Started
 
