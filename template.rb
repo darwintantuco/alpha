@@ -221,10 +221,12 @@ end
 
 def setup_react
   run 'yarn add \
-    @babel/preset-react \
     remount \
     react \
     react-dom'
+
+  run 'yarn add --dev \
+    @babel/preset-react'
 
   inject_into_file 'babel.config.js',
     after: 'presets: [' do
