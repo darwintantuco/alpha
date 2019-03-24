@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'shellwords'
 
-MINIMUM_RUBY_VERSION = '2.6.0'
+MINIMUM_RUBY_VERSION = '2.6.1'
 MINIMUM_RAILS_VERSION = '5.2.0'
 MINIMUM_NODE_VERSION = '10.15.1'
 

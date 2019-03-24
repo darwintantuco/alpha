@@ -31,7 +31,7 @@ Each change is separated by different commits to easily track any changes made.
 
 ### Requirements
 
-- ruby >= 2.6.0
+- ruby >= 2.6.1
 - rails >= 5.2
 - nodejs >= 10.15.1
 - yarn
@@ -211,7 +211,7 @@ AllCops:
     - 'db/schema.rb'
     - 'db/seeds.rb'
     - 'bin/*'
-  TargetRubyVersion: 2.6.0
+  TargetRubyVersion: 2.6.1
 ```
 
 #### Eslint
