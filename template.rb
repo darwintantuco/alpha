@@ -337,9 +337,9 @@ end
 
 def rspec_test_suite
   # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
+  run 'bin/spring stop'
+  run 'bin/spring binstub --all'
+  run 'bin/rails generate rspec:install'
 
   add_rspec_examples
   configure_headless_chrome
@@ -391,11 +391,8 @@ add_linter_packages
 copy_linter_files
 
 after_bundle do
-  run 'bundle exec rails db:create'
-  run 'bundle exec rails db:migrate'
-
   if options['webpack']
-    run 'bundle exec rails webpacker:install'
+    run 'bin/rails webpacker:install'
 
     git add: '.'
     git commit: "-a -m 'Execute rails webpacker:install'"
