@@ -387,7 +387,7 @@ add_template_repository_to_source_path
 
 initial_commit
 add_essential_gems
-setup_homepage_template
+setup_homepage_template if options['webpack']
 
 generate_tool_versions if args.include? '--asdf'
 
