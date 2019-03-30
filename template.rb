@@ -17,13 +17,15 @@ end
 def node_version
   node = run 'node -v', capture: true
   abort ("Aborted! node > v#{MINIMUM_NODE_VERSION} is required.") unless node
+  # v10.15.1
   node.chomp[1..-1]
 end
 
 def yarn_version
   yarn = run 'yarn -v', capture: true
   abort ("Aborted! yarn > v#{MINIMUM_YARN_VERSION} is required.") unless yarn
-  yarn.chomp[1..-1]
+  # 1.15.2
+  yarn.chomp[0..-1]
 end
 
 def check_version_requirements
