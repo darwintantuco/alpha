@@ -34,7 +34,7 @@ Each change is separated by different commits to easily track any changes made.
 - ruby >= 2.6.0
 - rails >= 5.2
 - nodejs >= 10.15.1
-- yarn
+- yarn >= 1.15.2
 
 ### Optional
 

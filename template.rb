@@ -4,6 +4,7 @@ require 'shellwords'
 MINIMUM_RUBY_VERSION = '2.6.0'
 MINIMUM_RAILS_VERSION = '5.2.0'
 MINIMUM_NODE_VERSION = '10.15.1'
+MINIMUM_YARN_VERSION = '1.15.2'
 
 def version(version)
   Gem::Version.create(version)
@@ -19,6 +20,12 @@ def node_version
   node.chomp[1..-1]
 end
 
+def yarn_version
+  yarn = run 'yarn -v', capture: true
+  abort ("Aborted! yarn > v#{MINIMUM_YARN_VERSION} is required.") unless yarn
+  yarn.chomp[1..-1]
+end
+
 def check_version_requirements
   unless minimum_version_met? RUBY_VERSION, MINIMUM_RUBY_VERSION
     abort("Aborted! Required ruby version >=#{MINIMUM_RUBY_VERSION}.")
@@ -30,6 +37,10 @@ def check_version_requirements
 
   unless minimum_version_met? node_version, MINIMUM_NODE_VERSION
     abort("Aborted! Required node version >=#{MINIMUM_NODE_VERSION}.")
+  end
+
+  unless minimum_version_met? yarn_version, MINIMUM_YARN_VERSION
+    abort("Aborted! Required yarn version >=#{MINIMUM_YARN_VERSION}.")
   end
 end
 
