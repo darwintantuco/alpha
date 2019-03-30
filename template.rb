@@ -397,6 +397,7 @@ copy_linter_files
 
 after_bundle do
   if options['webpack']
+    run 'bundle'
     run 'bundle exec rails webpacker:install'
 
     git add: '.'
