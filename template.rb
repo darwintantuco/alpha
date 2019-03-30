@@ -288,6 +288,7 @@ def setup_jest
   git add: '.'
   git commit: "-a -m 'Configure jest and enzyme and working react tests'"
 
+  restart_spring
   run 'yarn test'
 
   git add: '.'
@@ -341,9 +342,7 @@ def initial_commit
 end
 
 def rspec_test_suite
-  # fixes intermittent failures in rspec generator
-  run 'bin/spring stop'
-  run 'bin/spring binstub --all'
+  restart_spring
   run 'bin/rails generate rspec:install'
 
   add_rspec_examples
@@ -382,6 +381,14 @@ def initial_lint_fixes
   git commit: "-a -m 'Initial lint fixes'"
 end
 
+def restart_spring
+  # fixes intermittent failures in rspec and webpack generators
+  unless options['--skip-spring']
+    run 'bin/spring stop'
+    run 'bin/spring binstub --all'
+  end
+end
+
 check_version_requirements
 add_template_repository_to_source_path
 
@@ -397,6 +404,7 @@ copy_linter_files
 
 after_bundle do
   if options['webpack']
+    restart_spring
     run 'bundle'
     run 'bundle exec rails webpacker:install'
 
