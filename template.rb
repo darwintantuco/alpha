@@ -138,7 +138,6 @@ def insert_yarn_scripts
 end
 
 def add_essential_packages
-  restart_spring
   run 'yarn add sanitize.css modularscale-sass'
 
   git add: '.'
@@ -146,7 +145,6 @@ def add_essential_packages
 end
 
 def add_linter_packages
-  restart_spring
   run 'yarn add --dev \
     stylelint \
     stylelint-config-standard \
@@ -235,13 +233,11 @@ def initial_webpack_assets
 end
 
 def setup_react
-  restart_spring
   run 'yarn add \
     remount \
     react \
     react-dom'
 
-  restart_spring
   run 'yarn add --dev \
     @babel/preset-react'
 
@@ -272,7 +268,10 @@ def webpacker_esm_mjs_fixes
 end
 
 def setup_jest
-  restart_spring
+  # fixes yarn integrity check
+  # revisit this later
+  run 'rm -r node_modules'
+
   run 'yarn add --dev \
     jest \
     babel-jest \
@@ -306,7 +305,6 @@ def setup_jest
   git add: '.'
   git commit: "-a -m 'Configure jest and enzyme and working react tests'"
 
-  restart_spring
   run 'yarn test'
 
   git add: '.'
@@ -400,7 +398,7 @@ def initial_lint_fixes
 end
 
 def restart_spring
-  # fixes intermittent failures in rspec and webpack generators
+  # fixes intermittent failures in rspec generator
   unless options['--skip-spring']
     run 'bin/spring stop'
     run 'bin/spring binstub --all'
