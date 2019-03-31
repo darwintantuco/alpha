@@ -412,22 +412,22 @@ add_template_repository_to_source_path
 
 initial_commit
 add_essential_gems
-setup_homepage_template if options['webpack']
 
 generate_tool_versions if args.include? '--asdf'
 
-add_essential_packages if options['webpack']
 add_linter_packages
 copy_linter_files
 
 after_bundle do
   if options['webpack']
-    restart_spring
     run 'bundle'
     run 'bundle exec rails webpacker:install'
 
     git add: '.'
     git commit: "-a -m 'Execute rails webpacker:install'"
+
+    add_essential_packages
+    setup_homepage_template
 
     initial_webpack_assets
     setup_react
