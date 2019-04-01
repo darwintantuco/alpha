@@ -5,5 +5,6 @@ addons:
   chrome: stable
 before_install:
   - nvm install node
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.0
 install: gem install rails
 script: yarn && yarn test
