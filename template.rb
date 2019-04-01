@@ -184,6 +184,7 @@ def initial_webpack_assets
   # images
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
   copy_file 'app/javascript/images/rails-logo.svg', 'app/javascript/images/rails-logo.svg'
+  copy_file 'app/javascript/images/welcome.jpeg', 'app/javascript/images/welcome.jpeg'
 
   # js
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
@@ -211,20 +212,6 @@ def initial_webpack_assets
     <<~EOS.chomp
     \n    <%= javascript_pack_tag 'application' %>
         <%= stylesheet_pack_tag 'application' %>
-    EOS
-  end
-
-  # render sample icon
-  inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
-    <<~EOS.chomp
-    \n  <%= image_tag asset_pack_path('media/images/rails-logo.svg'), class: 'logo' %>
-    EOS
-  end
-
-  # render greeter component
-  inject_into_file 'app/views/home/index.html.erb', after: '</div>' do
-    <<~EOS.chomp
-    \n<x-greeter props-json='{"name":"Lodi"}'></x-greeter>
     EOS
   end
 
