@@ -292,7 +292,7 @@ def setup_jest
   git add: '.'
   git commit: "-a -m 'Configure jest and enzyme and working react tests'"
 
-  run 'yarn test'
+  run 'yarn test -u'
 
   git add: '.'
   git commit: "-a -m 'Generate snapshot for Greeter spec'"
