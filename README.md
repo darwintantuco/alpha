@@ -178,7 +178,7 @@ Added gems:
 
 Initial `rubocop_todo.yml` is generated.
 
-```
+```yaml
 # .rubocop.yml
 inherit_from: .rubocop_todo.yml
 require: rubocop-rspec
