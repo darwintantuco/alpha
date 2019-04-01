@@ -348,7 +348,7 @@ def rspec_test_suite
   restart_spring
   run 'bin/rails generate rspec:install'
 
-  add_rspec_examples
+  add_rspec_examples if options['webpack']
   configure_headless_chrome
   configure_database_cleaner
 
@@ -424,6 +424,7 @@ after_bundle do
   end
 
   rspec_test_suite
+
   generate_rubocop_todo
   initial_lint_fixes
 end
