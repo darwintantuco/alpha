@@ -73,4 +73,8 @@ teardown() {
   # jest works
   run yarn run test
   assert_success
+
+  # output rails app has no uncommitted changes
+  run git status
+  refute_output --partial 'untracked files present'
 }

@@ -4,6 +4,7 @@ require 'shellwords'
 MINIMUM_RUBY_VERSION = '2.6.0'
 MINIMUM_RAILS_VERSION = '5.2.0'
 MINIMUM_NODE_VERSION = '10.15.1'
+MINIMUM_YARN_VERSION = '1.12.0'
 
 def version(version)
   Gem::Version.create(version)
@@ -16,7 +17,15 @@ end
 def node_version
   node = run 'node -v', capture: true
   abort ("Aborted! node > v#{MINIMUM_NODE_VERSION} is required.") unless node
+  # v10.15.1
   node.chomp[1..-1]
+end
+
+def yarn_version
+  yarn = run 'yarn -v', capture: true
+  abort ("Aborted! yarn > v#{MINIMUM_YARN_VERSION} is required.") unless yarn
+  # 1.15.2
+  yarn.chomp[0..-1]
 end
 
 def check_version_requirements
@@ -30,6 +39,10 @@ def check_version_requirements
 
   unless minimum_version_met? node_version, MINIMUM_NODE_VERSION
     abort("Aborted! Required node version >=#{MINIMUM_NODE_VERSION}.")
+  end
+
+  unless minimum_version_met? yarn_version, MINIMUM_YARN_VERSION
+    abort("Aborted! Required yarn version >=#{MINIMUM_YARN_VERSION}.")
   end
 end
 
@@ -171,6 +184,7 @@ def initial_webpack_assets
   # images
   copy_file 'app/javascript/images/application.js', 'app/javascript/images/application.js'
   copy_file 'app/javascript/images/rails-logo.svg', 'app/javascript/images/rails-logo.svg'
+  copy_file 'app/javascript/images/welcome.jpeg', 'app/javascript/images/welcome.jpeg'
 
   # js
   copy_file 'app/javascript/js/application.js', 'app/javascript/js/application.js'
@@ -201,30 +215,18 @@ def initial_webpack_assets
     EOS
   end
 
-  # render sample icon
-  inject_into_file 'app/views/home/index.html.erb', after: '<div class="home-page">' do
-    <<~EOS.chomp
-    \n  <%= image_tag asset_pack_path('media/images/rails-logo.svg'), class: 'logo' %>
-    EOS
-  end
-
-  # render greeter component
-  inject_into_file 'app/views/home/index.html.erb', after: '</div>' do
-    <<~EOS.chomp
-    \n<x-greeter props-json='{"name":"Lodi"}'></x-greeter>
-    EOS
-  end
-
   git add: '.'
   git commit: "-a -m 'Initial webpack assets'"
 end
 
 def setup_react
   run 'yarn add \
-    @babel/preset-react \
     remount \
     react \
     react-dom'
+
+  run 'yarn add --dev \
+    @babel/preset-react'
 
   inject_into_file 'babel.config.js',
     after: 'presets: [' do
@@ -253,6 +255,10 @@ def webpacker_esm_mjs_fixes
 end
 
 def setup_jest
+  # fixes yarn integrity check
+  # revisit this later
+  run 'rm -r node_modules'
+
   run 'yarn add --dev \
     jest \
     babel-jest \
@@ -280,14 +286,16 @@ def setup_jest
     EOS
   end
 
-  git add: '.'
-  git commit: "-a -m 'Configure jest and enzyme'"
-
   copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
     'app/javascript/react/components/__tests__/Greeter.spec.js'
 
   git add: '.'
-  git commit: "-a -m 'Working react tests'"
+  git commit: "-a -m 'Configure jest and enzyme and working react tests'"
+
+  run 'yarn test'
+
+  git add: '.'
+  git commit: "-a -m 'Generate snapshot for Greeter spec'"
 end
 
 def add_rspec_examples
@@ -337,10 +345,8 @@ def initial_commit
 end
 
 def rspec_test_suite
-  # fixes intermittent failures in rspec generator
-  run 'bundle exec spring stop'
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec rails generate rspec:install'
+  restart_spring
+  run 'bin/rails generate rspec:install'
 
   add_rspec_examples
   configure_headless_chrome
@@ -378,28 +384,35 @@ def initial_lint_fixes
   git commit: "-a -m 'Initial lint fixes'"
 end
 
+def restart_spring
+  # fixes intermittent failures in rspec generator
+  unless options['--skip-spring']
+    run 'bin/spring stop'
+    run 'bin/spring binstub --all'
+  end
+end
+
 check_version_requirements
 add_template_repository_to_source_path
 
 initial_commit
 add_essential_gems
-setup_homepage_template
 
 generate_tool_versions if args.include? '--asdf'
 
-add_essential_packages if options['webpack']
 add_linter_packages
 copy_linter_files
 
 after_bundle do
-  run 'bundle exec rails db:create'
-  run 'bundle exec rails db:migrate'
-
   if options['webpack']
+    run 'bundle'
     run 'bundle exec rails webpacker:install'
 
     git add: '.'
     git commit: "-a -m 'Execute rails webpacker:install'"
+
+    add_essential_packages
+    setup_homepage_template
 
     initial_webpack_assets
     setup_react
