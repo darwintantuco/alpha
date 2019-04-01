@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - ruby 2.6.1
+  - ruby 2.6.0
 addons:
   chrome: stable
 before_install:
