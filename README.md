@@ -84,7 +84,8 @@ rails new appname \
 │   │   └── vendor.scss
 │   ├── images
 │   │   ├── application.js
-│   │   └── rails-logo.svg
+│   │   ├── rails-logo.svg
+│   │   └── welcome.jpeg
 │   ├── js
 │   │   └── application.js
 │   ├── packs
