@@ -404,6 +404,9 @@ add_linter_packages
 copy_linter_files
 
 after_bundle do
+  run 'bundle exec rails db:create'
+  run 'bundle exec rails db:migrate'
+
   if options['webpack']
     run 'bundle'
     run 'bundle exec rails webpacker:install'
