@@ -239,21 +239,6 @@ def setup_react
   git commit: "-a -m 'Add react packages'"
 end
 
-def webpacker_esm_mjs_fixes
-  inject_into_file 'config/webpack/environment.js',
-    after: "require('@rails/webpacker')" do
-    <<~EOS.chomp
-    \nconst customConfig = require('./custom')
-    environment.config.merge(customConfig)
-    EOS
-  end
-
-  copy_file 'config/webpack/custom.js', 'config/webpack/custom.js'
-
-  git add: '.'
-  git commit: "-a -m 'Fix .esm.mjs issue in webpacker'"
-end
-
 def setup_jest
   # fixes yarn integrity check
   # revisit this later
@@ -419,7 +404,6 @@ after_bundle do
 
     initial_webpack_assets
     setup_react
-    webpacker_esm_mjs_fixes
     setup_jest
   end
 
