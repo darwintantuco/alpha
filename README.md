@@ -20,7 +20,7 @@ Each change is separated by different commits to easily track any changes made.
 - Rspec test suite
 - Javascript test suite
   - [jest](https://github.com/facebook/jest)
-  - [enzyme](https://github.com/airbnb/enzyme)
+  - [react-testing-library](https://github.com/testing-library/react-testing-library)
 - Preconfigured linters
   - [rubocop](https://github.com/rubocop-hq/rubocop)
   - [prettier](https://github.com/prettier/prettier)
@@ -131,23 +131,13 @@ Added packages:
 |          faker           |         generate fake data          |
 |      rubocop-rspec       |       rspec-specific analysis       |
 
-### Jest and Enzyme
+### Jest and react-testing-library
 
 Added packages:
 
 - jest
 - babel-jest
-- enzyme
-- enzyme-adapter-react-16
-- enzyme-to-json
-- react-test-renderer
-
-```js
-// setupTests.js
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-configure({ adapter: new Adapter() })
-```
+- react-testing-library
 
 ```js
 // package.json
@@ -155,12 +145,6 @@ configure({ adapter: new Adapter() })
   "roots": [
     "app/assets/javascripts",
     "app/javascript"
-  ],
-  "snapshotSerializers": [
-    "enzyme-to-json/serializer"
-  ],
-  "setupFiles": [
-    "./setupTests.js"
   ]
 },
 ```
