@@ -1,15 +1,12 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import renderer from 'react-test-renderer'
+import { render, cleanup } from 'react-testing-library'
 
 import Greeter from '../Greeter'
 
+afterEach(cleanup)
+
 it('renders without crashing', () => {
-  shallow(<Greeter />)
-})
+  const co = render(<Greeter name='lodi' />)
 
-it('matches the snapshot', () => {
-  const tree = renderer.create(<Greeter name='lodi' />).toJSON()
-
-  expect(tree).toMatchSnapshot()
+  co.getByTestId('greeter')
 })
