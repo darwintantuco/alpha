@@ -247,29 +247,7 @@ def setup_jest
   run 'yarn add --dev \
     jest \
     babel-jest \
-    enzyme \
-    enzyme-adapter-react-16 \
-    enzyme-to-json \
-    react-test-renderer'
-
-  copy_file 'setupTests.js', 'setupTests.js'
-
-  inject_into_file 'package.json', after: '  "private": true,' do
-    <<~EOS.chomp
-    \n  "jest": {
-        "roots": [
-          "app/assets/javascripts",
-          "app/javascript"
-        ],
-        "snapshotSerializers": [
-          "enzyme-to-json/serializer"
-        ],
-        "setupFiles": [
-          "./setupTests.js"
-        ]
-      },
-    EOS
-  end
+    react-testing-library'
 
   copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
     'app/javascript/react/components/__tests__/Greeter.spec.js'
