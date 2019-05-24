@@ -260,16 +260,14 @@ def setup_jest
     EOS
   end
 
+  git add: '.'
+  git commit: "-a -m 'Configure jest and react-testing-library'"
+
   copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
     'app/javascript/react/components/__tests__/Greeter.spec.js'
 
   git add: '.'
-  git commit: "-a -m 'Configure jest and enzyme and working react tests'"
-
-  run 'yarn test -u'
-
-  git add: '.'
-  git commit: "-a -m 'Generate snapshot for Greeter spec'"
+  git commit: "-a -m 'Add working react tests'"
 end
 
 def add_rspec_examples
