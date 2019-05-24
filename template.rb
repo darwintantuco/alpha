@@ -249,6 +249,17 @@ def setup_jest
     babel-jest \
     react-testing-library'
 
+  inject_into_file 'package.json', after: '  "private": true,' do
+    <<~EOS.chomp
+    \n  "jest": {
+        "roots": [
+          "app/assets/javascripts",
+          "app/javascript"
+        ]
+      },
+    EOS
+  end
+
   copy_file 'app/javascript/react/components/__tests__/Greeter.spec.js',
     'app/javascript/react/components/__tests__/Greeter.spec.js'
 
