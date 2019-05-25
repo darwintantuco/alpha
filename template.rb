@@ -191,7 +191,12 @@ def initial_webpack_assets
 
   # react
   copy_file 'app/javascript/react/application.js', 'app/javascript/react/application.js'
-  copy_file 'app/javascript/react/components/Greeter.js', 'app/javascript/react/components/Greeter.js'
+
+  if args.include? '--typescript'
+    copy_file 'app/javascript/react/components/Greeter.tsx', 'app/javascript/react/components/Greeter.tsx'
+  else
+    copy_file 'app/javascript/react/components/Greeter.js', 'app/javascript/react/components/Greeter.js'
+  end
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
