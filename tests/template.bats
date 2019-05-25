@@ -52,9 +52,7 @@ teardown() {
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
-
-  # asdf
-  assert [ -e "$WORKSPACE/appname/.tool-versions" ]
+  assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.js" ]
 
   # essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
@@ -77,4 +75,18 @@ teardown() {
   # output rails app has no uncommitted changes
   run git status
   refute_output --partial 'untracked files present'
+}
+
+@test 'Custom flags' {
+  rails new appname \
+    --asdf \
+    --typescript \
+    --webpack \
+    -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+
+  # asdf
+  assert [ -e "$WORKSPACE/appname/.tool-versions" ]
+
+  # typescript
+  assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
 }

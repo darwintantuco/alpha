@@ -14,3 +14,8 @@ bats@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bats/-/bats-1.1.0.tgz#6fc44f283ed4e7af2b6ffac93ec5026a1acbdc66"
   integrity sha512-1pA29OhDByrUtAXX+nmqZxgRgx2y8PvuZzbLJVjd2dpEDVDvz0MjcBMdmIPNq5lC+tG53G+RbeRsbIlv3vw7tg==
+
+prettier@^1.16.4:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.17.1.tgz#ed64b4e93e370cb8a25b9ef7fef3e4fd1c0995db"
+  integrity sha512-TzGRNvuUSmPgwivDqkZ9tM/qTGW9hqDKWOE9YHiyQdixlKbv7kvEqsmDPrcHJTKwthU774TQwZXVtaQ/mMsvjg==

@@ -1,4 +1,4 @@
-import Greeter from './components/Greeter.js'
+import Greeter from './components/Greeter'
 import { define } from 'remount'
 
 define({ 'x-greeter': Greeter })

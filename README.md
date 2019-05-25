@@ -57,15 +57,17 @@ rails new appname \
   --skip-turbolinks \
   --skip-coffee \
   --asdf \
+  --typescript \
   --webpack \
   -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
 #### Custom Flags
 
-|  Flag  |        Description         |
-| :----: | :------------------------: |
-| --asdf | generates `.tool_versions` |
+|     Flag     |                           Description                            |
+| :----------: | :--------------------------------------------------------------: |
+|    --asdf    |                    generates `.tool_versions`                    |
+| --typescript | typescript support and sample react components are in typescript |
 
 ### Webpacker Setup
 
@@ -93,7 +95,7 @@ rails new appname \
 │   └── react
 │       ├── components
 │       │   ├── __tests__
-│       │   └── Greeter.js
+│       │   └── Greeter.js / Greeter.tsx
 │       └── application.js
 ├── jobs
 └── mailers

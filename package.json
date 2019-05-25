@@ -13,6 +13,7 @@
   "devDependencies": {
     "bats": "^1.0.2",
     "bats-assert": "https://github.com/ztombol/bats-assert",
-    "bats-support": "https://github.com/ztombol/bats-support"
+    "bats-support": "https://github.com/ztombol/bats-support",
+    "prettier": "^1.16.4"
   }
 }

@@ -191,7 +191,12 @@ def initial_webpack_assets
 
   # react
   copy_file 'app/javascript/react/application.js', 'app/javascript/react/application.js'
-  copy_file 'app/javascript/react/components/Greeter.js', 'app/javascript/react/components/Greeter.js'
+
+  if args.include? '--typescript'
+    copy_file 'app/javascript/react/components/Greeter.tsx', 'app/javascript/react/components/Greeter.tsx'
+  else
+    copy_file 'app/javascript/react/components/Greeter.js', 'app/javascript/react/components/Greeter.js'
+  end
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
@@ -237,6 +242,13 @@ def setup_react
 
   git add: '.'
   git commit: "-a -m 'Add react packages'"
+end
+
+def setup_typescript
+  run 'bundle exec rails webpacker:install:typescript'
+
+  git add: '.'
+  git commit: "-a -m 'Execute bundle exec rails webpacker:install:typescript'"
 end
 
 def setup_jest
@@ -391,6 +403,7 @@ after_bundle do
 
     initial_webpack_assets
     setup_react
+    setup_typescript if args.include? '--typescript'
     setup_jest
   end
 
