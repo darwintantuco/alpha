@@ -239,6 +239,13 @@ def setup_react
   git commit: "-a -m 'Add react packages'"
 end
 
+def setup_typescript
+  run 'bundle exec rails webpacker:install:typescript'
+
+  git add: '.'
+  git commit: "-a -m 'Execute bundle exec rails webpacker:install:typescript'"
+end
+
 def setup_jest
   # fixes yarn integrity check
   # revisit this later
@@ -391,6 +398,7 @@ after_bundle do
 
     initial_webpack_assets
     setup_react
+    setup_typescript if args.include? '--typescript'
     setup_jest
   end
 
