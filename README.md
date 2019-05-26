@@ -18,6 +18,9 @@ Each change is separated by different commits to easily track any changes made.
   - [modularscale-sass](https://github.com/modularscale/modularscale-sass)
 - [hamlit](https://github.com/k0kubun/hamlit) as templating language
 - Rspec test suite
+  - Includes rspec and other gems useful in testing.
+  - Preconfigured with headless chromedriver
+  - Working rspec examples with js enabled
 - Javascript test suite
   - [jest](https://github.com/facebook/jest)
   - [react-testing-library](https://github.com/testing-library/react-testing-library)
@@ -119,7 +122,7 @@ Added packages:
 
 - Includes rspec and other gems useful in testing.
 - Preconfigured with headless chromedriver
-- Working rspec examples with js
+- Working rspec examples with js enabled
 
 |           Gem            |             Description             |
 | :----------------------: | :---------------------------------: |
@@ -133,7 +136,7 @@ Added packages:
 |          faker           |         generate fake data          |
 |      rubocop-rspec       |       rspec-specific analysis       |
 
-### Jest and react-testing-library
+### Javascript Test Suite
 
 Added packages:
 
