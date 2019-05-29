@@ -25,9 +25,6 @@ teardown() {
   # no webpacker setup
   refute [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
 
-  # no asdf
-  refute [ -e "$WORKSPACE/appname/.tool-versions" ]
-
   # no essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_failure
@@ -47,12 +44,15 @@ teardown() {
     --skip-turbolinks \
     --skip-coffee \
     --asdf \
+    --typescript \
     --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
-  assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.js" ]
+
+  # typescript
+  assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
 
   # essential yarn packages
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
@@ -75,18 +75,34 @@ teardown() {
   # output rails app has no uncommitted changes
   run git status
   refute_output --partial 'untracked files present'
+
+  # asdf
+  assert [ -e "$WORKSPACE/appname/.tool-versions" ]
 }
 
 @test 'Custom flags' {
   rails new appname \
-    --asdf \
-    --typescript \
-    --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
-  # asdf
-  assert [ -e "$WORKSPACE/appname/.tool-versions" ]
+  # rspec passes
+  run rspec
+  assert_success
 
-  # typescript
-  assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
+  # linter works
+  run yarn run lint:ci
+  assert_success
+
+  # jest works
+  run yarn run test
+  assert_success
+
+  # output rails app has no uncommitted changes
+  run git status
+  refute_output --partial 'untracked files present'
+
+  # no asdf
+  refute [ -e "$WORKSPACE/appname/.tool-versions" ]
+
+  # no typescript
+  refute [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
 }
