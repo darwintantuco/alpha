@@ -249,6 +249,8 @@ def setup_typescript
 
   git add: '.'
   git commit: "-a -m 'Execute bundle exec rails webpacker:install:typescript'"
+
+
 end
 
 def setup_jest
@@ -260,6 +262,17 @@ def setup_jest
     jest \
     babel-jest \
     react-testing-library'
+
+  if args.include? '--typescript'
+    run 'yarn add --dev @babel/preset-typescript'
+
+    inject_into_file 'babel.config.js',
+      after: 'presets: [' do
+      <<~EOS.chomp
+      \n      [require('@babel/preset-typescript')],
+      EOS
+    end
+  end
 
   inject_into_file 'package.json', after: '  "private": true,' do
     <<~EOS.chomp
