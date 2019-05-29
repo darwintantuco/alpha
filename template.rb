@@ -274,16 +274,7 @@ def setup_jest
     end
   end
 
-  inject_into_file 'package.json', after: '  "private": true,' do
-    <<~EOS.chomp
-    \n  "jest": {
-        "roots": [
-          "app/assets/javascripts",
-          "app/javascript"
-        ]
-      },
-    EOS
-  end
+  copy_file 'jest.config.js', 'jest.config.js'
 
   git add: '.'
   git commit: "-a -m 'Configure jest and react-testing-library'"
