@@ -88,14 +88,6 @@ teardown() {
   run rspec
   assert_success
 
-  # linter works
-  run yarn run lint:ci
-  assert_success
-
-  # jest works
-  run yarn run test
-  assert_success
-
   # output rails app has no uncommitted changes
   run git status
   refute_output --partial 'untracked files present'
