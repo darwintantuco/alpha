@@ -145,13 +145,10 @@ Added packages:
 - react-testing-library
 
 ```js
-// package.json
-"jest": {
-  "roots": [
-    "app/assets/javascripts",
-    "app/javascript"
-  ]
-},
+// jest.config.js
+module.exports = {
+  roots: ['app/assets/javascripts', 'app/javascript']
+}
 ```
 
 ### Preconfigured Linters
