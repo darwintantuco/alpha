@@ -273,7 +273,7 @@ def setup_jest
   run 'yarn add --dev \
     jest \
     babel-jest \
-    react-testing-library'
+    @testing-library/react'
 
   if args.include? '--typescript'
     run 'yarn add --dev @babel/preset-typescript'
