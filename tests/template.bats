@@ -77,6 +77,10 @@ teardown() {
 
   # asdf
   assert [ -e "$WORKSPACE/appname/.tool-versions" ]
+
+  # webpacker compiles without error
+  run bin/webpack-dev-server --config config/webpack/development.js
+  assert_output --partial 'Compiled successfully.'
 }
 
 @test 'Custom flags' {
