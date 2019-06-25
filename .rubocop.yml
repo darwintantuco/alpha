@@ -10,9 +10,6 @@ Style/StringLiterals:
 Style/HashSyntax:
   EnforcedStyle: ruby19
 
-Layout/IndentationConsistency:
-  EnforcedStyle: rails
-
 Layout/CaseIndentation:
   EnforcedStyle: end
 
