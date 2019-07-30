@@ -83,10 +83,10 @@ def add_essential_gems
 
   gem_group :test do
     gem 'capybara'
-    gem 'chromedriver-helper'
     gem 'database_cleaner'
     gem 'faker'
     gem 'selenium-webdriver'
+    gem 'webdrivers'
   end
 
   git add: '.'
