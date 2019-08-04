@@ -60,7 +60,6 @@ rails new appname \
   --skip-turbolinks \
   --skip-coffee \
   --asdf \
-  --typescript \
   --webpack \
   -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
