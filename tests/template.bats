@@ -84,8 +84,9 @@ teardown() {
 
 @test 'Custom flags' {
   rails new appname \
-    --typescript
-    --asdf
+    --typescript \
+    --asdf \
+    --webpack \
     -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 
   # rspec passes
@@ -95,6 +96,9 @@ teardown() {
   # output rails app has no uncommitted changes
   run git status
   refute_output --partial 'untracked files present'
+
+  # webpacker setup
+  assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
 
   # typescript
   assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
