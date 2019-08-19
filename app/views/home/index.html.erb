@@ -12,8 +12,8 @@
   <%= image_tag asset_pack_path('media/images/packs/welcome.jpeg'), class: 'welcome' %>
 
   <p class="version">
-    <strong>Rails version:</strong> 5.2.3<br />
-    <strong>Ruby version:</strong> 2.6.1 (x86_64-darwin17)
+    <strong>Rails version:</strong> <%= Rails.version %> <br />
+    <strong>Ruby version:</strong> <%= RUBY_DESCRIPTION %>
   </p>
 
   <x-greeter props-json='{"name":"Lodi"}'></x-greeter>
