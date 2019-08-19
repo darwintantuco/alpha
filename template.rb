@@ -200,7 +200,7 @@ def initial_webpack_assets
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
-    after: "// layout file, like app/views/layouts/application.html.erb" do
+    after: "// const imagePath = (name) => images(name, true)" do
     <<~EOS.chomp
     \nimport "../images/application";
 
