@@ -249,8 +249,6 @@ def setup_typescript
 
   git add: '.'
   git commit: "-a -m 'Execute bundle exec rails webpacker:install:typescript'"
-
-
 end
 
 def setup_jest
@@ -399,14 +397,14 @@ after_bundle do
   git commit: "-a -m 'Execute rails webpacker:install'"
 
   add_essential_packages
+
   setup_homepage_template
-
   initial_webpack_assets
-  setup_react
-  setup_typescript if args.include? '--typescript'
-  setup_jest
 
+  setup_react
+  setup_jest
   rspec_test_suite
+  setup_typescript if args.include? '--typescript'
 
   generate_rubocop_todo
   initial_lint_fixes
