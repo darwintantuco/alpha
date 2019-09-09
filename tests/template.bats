@@ -16,7 +16,7 @@ teardown() {
   fi
 }
 
-@test 'Basic Usage' {
+@test 'Usage' {
   # exit 0
   rails new appname \
     --database=postgresql \

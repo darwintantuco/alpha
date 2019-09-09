@@ -76,7 +76,7 @@ def add_essential_gems
   gem_group :development, :test do
     gem 'factory_bot_rails'
     gem 'rails-controller-testing'
-    gem 'rspec-rails'
+    gem 'rspec-rails', '~> 4.0.0.beta2'
     gem "rubocop", require: false
     gem 'rubocop-rspec'
   end

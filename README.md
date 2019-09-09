@@ -46,9 +46,7 @@ Each change is separated by different commits to easily track any changes made.
 ### Basic Usage
 
 ```
-rails new appname \
-  --database=postgresql \
-  -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+rails new appname -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
 ### Recommended Usage
@@ -60,7 +58,7 @@ rails new appname \
   --skip-turbolinks \
   --skip-coffee \
   --asdf \
-  --webpack \
+  --typescript \
   -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
 ```
 
