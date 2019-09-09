@@ -253,18 +253,6 @@ def setup_typescript
 
 end
 
-def webpacker_corejs_fixes
-  inject_into_file 'config/webpack/environment.js',
-    after: "require('@rails/webpacker')" do
-    <<~EOS.chomp
-    \nenvironment.loaders.delete('nodeModules');
-    EOS
-  end
-
-  git add: '.'
-  git commit: "-a -m 'Fix corejs issue in webpacker'"
-end
-
 def setup_jest
   # fixes yarn integrity check
   # revisit this later
@@ -416,7 +404,6 @@ after_bundle do
   initial_webpack_assets
   setup_react
   setup_typescript if args.include? '--typescript'
-  webpacker_corejs_fixes
   setup_jest
 
   rspec_test_suite
