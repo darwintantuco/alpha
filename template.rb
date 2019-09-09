@@ -348,7 +348,7 @@ def rspec_test_suite
   restart_spring
   run 'bin/rails generate rspec:install'
 
-  add_rspec_examples if options['webpack']
+  add_rspec_examples
   configure_headless_chrome
   configure_database_cleaner
 
@@ -407,22 +407,20 @@ after_bundle do
   run 'bundle exec rails db:create'
   run 'bundle exec rails db:migrate'
 
-  if options['webpack']
-    run 'bundle'
-    run 'bundle exec rails webpacker:install'
+  run 'bundle'
+  run 'bundle exec rails webpacker:install'
 
-    git add: '.'
-    git commit: "-a -m 'Execute rails webpacker:install'"
+  git add: '.'
+  git commit: "-a -m 'Execute rails webpacker:install'"
 
-    add_essential_packages
-    setup_homepage_template
+  add_essential_packages
+  setup_homepage_template
 
-    initial_webpack_assets
-    setup_react
-    setup_typescript if args.include? '--typescript'
-    webpacker_corejs_fixes
-    setup_jest
-  end
+  initial_webpack_assets
+  setup_react
+  setup_typescript if args.include? '--typescript'
+  webpacker_corejs_fixes
+  setup_jest
 
   rspec_test_suite
 
