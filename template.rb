@@ -407,9 +407,6 @@ after_bundle do
   run 'bundle exec rails db:create'
   run 'bundle exec rails db:migrate'
 
-  run 'bundle'
-  run 'bundle exec rails webpacker:install'
-
   git add: '.'
   git commit: "-a -m 'Execute rails webpacker:install'"
 
