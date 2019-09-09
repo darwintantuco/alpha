@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'shellwords'
 
-MINIMUM_RUBY_VERSION = '2.6.0'
-MINIMUM_RAILS_VERSION = '5.2.0'
+MINIMUM_RUBY_VERSION = '2.6.3'
+MINIMUM_RAILS_VERSION = '6.0.0'
 MINIMUM_NODE_VERSION = '10.15.1'
 MINIMUM_YARN_VERSION = '1.12.0'
 
@@ -200,7 +200,7 @@ def initial_webpack_assets
 
   # packs
   inject_into_file 'app/javascript/packs/application.js',
-    after: "// layout file, like app/views/layouts/application.html.erb" do
+    after: "// const imagePath = (name) => images(name, true)" do
     <<~EOS.chomp
     \nimport "../images/application";
 
@@ -348,7 +348,7 @@ def rspec_test_suite
   restart_spring
   run 'bin/rails generate rspec:install'
 
-  add_rspec_examples if options['webpack']
+  add_rspec_examples
   configure_headless_chrome
   configure_database_cleaner
 
@@ -407,22 +407,20 @@ after_bundle do
   run 'bundle exec rails db:create'
   run 'bundle exec rails db:migrate'
 
-  if options['webpack']
-    run 'bundle'
-    run 'bundle exec rails webpacker:install'
+  run 'bundle'
+  run 'bundle exec rails webpacker:install'
 
-    git add: '.'
-    git commit: "-a -m 'Execute rails webpacker:install'"
+  git add: '.'
+  git commit: "-a -m 'Execute rails webpacker:install'"
 
-    add_essential_packages
-    setup_homepage_template
+  add_essential_packages
+  setup_homepage_template
 
-    initial_webpack_assets
-    setup_react
-    setup_typescript if args.include? '--typescript'
-    webpacker_corejs_fixes
-    setup_jest
-  end
+  initial_webpack_assets
+  setup_react
+  setup_typescript if args.include? '--typescript'
+  webpacker_corejs_fixes
+  setup_jest
 
   rspec_test_suite
 

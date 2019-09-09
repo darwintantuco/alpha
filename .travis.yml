@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - ruby 2.6.0
+  - ruby 2.6.3
 addons:
   chrome: stable
 services:
@@ -9,5 +9,5 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
   - export PATH="$HOME/.yarn/bin:$PATH"
   - nvm install node
-install: gem install rails -v 5.2.3
+install: gem install rails -v 6.0.0
 script: yarn && yarn test

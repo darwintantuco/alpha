@@ -34,8 +34,8 @@ Each change is separated by different commits to easily track any changes made.
 
 ### Requirements
 
-- ruby >= 2.6.0
-- rails >= 5.2
+- ruby >= 2.6.3
+- rails >= 6.0.0
 - nodejs >= 10.15.1
 - yarn >= 1.12.0
 
