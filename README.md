@@ -176,7 +176,7 @@ Style/HashSyntax:
   EnforcedStyle: ruby19
 
 Layout/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 
 Layout/CaseIndentation:
   EnforcedStyle: end
@@ -195,7 +195,7 @@ AllCops:
     - 'db/schema.rb'
     - 'db/seeds.rb'
     - 'bin/*'
-  TargetRubyVersion: 2.6.0
+  TargetRubyVersion: 2.6.3
 ```
 
 #### Eslint
