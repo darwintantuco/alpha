@@ -89,6 +89,19 @@ def add_essential_gems
     gem 'webdrivers'
   end
 
+  gem_group :development do
+    gem 'bullet'
+  end
+
+  inject_into_file "config/environments/development.rb", before: /^end/ do
+    <<~EOS
+    \n  config.after_initialize do
+        Bullet.enable = true
+        Bullet.add_footer = true
+      end
+    EOS
+  end
+
   git add: '.'
   git commit: "-a -m 'Add essential gems'"
 end
