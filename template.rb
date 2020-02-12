@@ -157,7 +157,7 @@ def add_essential_packages
   git commit: "-a -m 'Add essential packages'"
 end
 
-def add_linter_packages
+def setup_linter_packages
   run 'yarn add --dev \
     stylelint \
     stylelint-config-standard \
@@ -171,9 +171,10 @@ def add_linter_packages
     npm-run-all'
 
   insert_yarn_scripts
+  copy_linter_files
 
   git add: '.'
-  git commit: "-a -m 'Add linter packages'"
+  git commit: "-a -m 'Setup linter packages'"
 end
 
 def copy_linter_files
@@ -181,9 +182,6 @@ def copy_linter_files
   copy_file '.eslintrc.js', '.eslintrc.js'
   copy_file '.stylelintrc', '.stylelintrc'
   copy_file '.prettierrc', '.prettierrc'
-
-  git add: '.'
-  git commit: "-a -m 'Initial linter configs'"
 end
 
 def initial_webpack_assets
@@ -399,8 +397,7 @@ add_essential_gems
 
 generate_tool_versions if args.include? '--asdf'
 
-add_linter_packages
-copy_linter_files
+setup_linter_packages
 
 after_bundle do
   run 'bundle exec rails db:create'
