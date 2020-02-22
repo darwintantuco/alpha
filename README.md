@@ -1,6 +1,6 @@
 # alpha
 
-[![Build Status](https://travis-ci.org/dcrtantuco/alpha.svg?branch=master)](https://travis-ci.org/dcrtantuco/alpha)
+[![Build Status](https://travis-ci.org/darwintantuco/alpha.svg?branch=master)](https://travis-ci.org/darwintantuco/alpha)
 
 Setting up a rails project takes at least one day to configure. This is my attempt to make it as fast as possible.
 
@@ -46,7 +46,7 @@ Each change is separated by different commits to easily track any changes made.
 ### Basic Usage
 
 ```
-rails new appname -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+rails new appname -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
 ```
 
 ### Recommended Usage
@@ -59,7 +59,7 @@ rails new appname \
   --skip-coffee \
   --asdf \
   --typescript \
-  -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+  -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
 ```
 
 #### Custom Flags

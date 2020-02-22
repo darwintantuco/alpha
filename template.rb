@@ -58,7 +58,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       '--quiet',
-      'https://github.com/dcrtantuco/alpha.git',
+      'https://github.com/darwintantuco/alpha.git',
       tempdir
     ].map(&:shellescape).join(' ')
 
