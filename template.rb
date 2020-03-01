@@ -389,6 +389,11 @@ def restart_spring
   end
 end
 
+def setup_database
+  run 'bundle exec rails db:create'
+  run 'bundle exec rails db:migrate'
+end
+
 check_version_requirements
 add_template_repository_to_source_path
 
@@ -415,5 +420,7 @@ after_bundle do
 
   generate_rubocop_todo
   initial_lint_fixes
+
+  setup_database
 end
 
