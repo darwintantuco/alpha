@@ -6,7 +6,7 @@ import Greeter from '../Greeter'
 afterEach(cleanup)
 
 it('renders without crashing', () => {
-  const co = render(<Greeter name='lodi' />)
+  const co = render(<Greeter message='Hey!' />)
 
   co.getByTestId('greeter')
 })
