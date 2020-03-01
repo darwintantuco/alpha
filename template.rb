@@ -392,6 +392,9 @@ end
 def setup_database
   run 'bundle exec rails db:create'
   run 'bundle exec rails db:migrate'
+
+  git add: '.'
+  git commit: "-a -m 'Setup database'"
 end
 
 check_version_requirements
