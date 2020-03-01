@@ -23,7 +23,7 @@ teardown() {
     --skip-test \
     --skip-turbolinks \
     --skip-coffee \
-    -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+    -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
@@ -62,7 +62,7 @@ teardown() {
     --typescript \
     --asdf \
     --webpack \
-    -m https://raw.githubusercontent.com/dcrtantuco/alpha/master/template.rb
+    -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
 
   # rspec passes
   run rspec

@@ -1,7 +1,9 @@
 import React from 'react'
 
-const Greeter = ({ name }) => {
-  return <div data-testid="greeter">Hey {name}! from Greeter react component</div>
+const Greeter = ({ message }) => {
+  return (
+    <div data-testid='greeter'>{message} - from Greeter react component</div>
+  )
 }
 
 export default Greeter
