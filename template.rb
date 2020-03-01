@@ -400,11 +400,8 @@ generate_tool_versions if args.include? '--asdf'
 setup_linter_packages
 
 after_bundle do
-  run 'bundle exec rails db:create'
-  run 'bundle exec rails db:migrate'
-
   git add: '.'
-  git commit: "-a -m 'Execute rails webpacker:install'"
+  git commit: "-a -m 'Initial commit'"
 
   add_essential_packages
 
@@ -419,3 +416,4 @@ after_bundle do
   generate_rubocop_todo
   initial_lint_fixes
 end
+
