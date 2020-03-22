@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface GreeterProps {
-  name: string
+  message: string
 }
 
 const Greeter = (props: GreeterProps) => {
