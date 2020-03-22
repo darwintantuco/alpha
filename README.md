@@ -288,9 +288,9 @@ Added packages:
 
 ## Post Install Guide
 
-### Convert existing erb files to haml
+#### Convert existing erb files to haml
 
-1. Install html2haml
+1. Install `html2haml`
 
    ```
    $ gem install html2haml
@@ -308,12 +308,26 @@ Added packages:
    $ find . -name \*.erb | xargs git rm
    ```
 
-1. Commit the changes.
-1. Uninstall
+1. Commit the changes
+1. Uninstall `html2haml`
 
    ```
    $ gem uninstall html2haml
    ```
+
+#### Consider removing `config/database.yml` in version control / git
+
+1. Add `config/database.yml` to `.gitignore`
+
+   ```
+   $ echo config/database.yml >> .gitignore
+   ```
+
+1. Rename `config/database.yml` to `config/database.yml.sample`
+   ```
+   $ git mv config/database.yml config/database.yml.sample
+   ```
+1. Commit the changes
 
 ## License
 
