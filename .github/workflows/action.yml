@@ -15,6 +15,9 @@ jobs:
       with:
         ruby-version: '2.7'
 
+    - name: Install rails
+      run: gem install rails -v 6.0.0
+
     - name: Install dependencies
       run: yarn --frozen--lockfile
 
