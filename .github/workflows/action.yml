@@ -15,11 +15,14 @@ jobs:
       with:
         ruby-version: '2.7'
 
+    - name: Install dependencies
+      run: yarn --frozen--lockfile
+
     - name: Install rails
       run: gem install rails -v 6.0.0
 
-    - name: Install dependencies
-      run: yarn --frozen--lockfile
+    - name: Setup git
+      run: (git config --global user.email "you@example.com" && git config --global user.name "Your Name")
 
     - name: Run tests
       run: yarn test
