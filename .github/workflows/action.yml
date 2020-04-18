@@ -19,7 +19,7 @@ jobs:
       run: yarn --frozen--lockfile
 
     - name: Install rails
-      run: gem install rails -v 6.0.0
+      run: gem install rails -v 6.0.2
 
     - name: Setup git
       run: (git config --global user.email "you@example.com" && git config --global user.name "Your Name")
