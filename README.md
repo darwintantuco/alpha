@@ -1,6 +1,6 @@
 # alpha
 
-[![Build Status](https://travis-ci.org/darwintantuco/alpha.svg?branch=master)](https://travis-ci.org/darwintantuco/alpha)
+![Ruby CI](https://github.com/darwintantuco/alpha/workflows/Ruby%20CI/badge.svg)
 
 Setting up a rails project takes at least one day to configure. This is my attempt to make it as fast as possible.
 
