@@ -141,7 +141,7 @@ def insert_yarn_scripts
         "lint:css": "stylelint \\"./app/**/*.scss\\"",
         "prettier:check": "prettier --list-different \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
         "prettier:fix": "prettier --write \\"./app/**/*.scss\\" \\"./app/**/*.{js,jsx}\\"",
-        "lint:ci": "run-s lint:ruby lint:js lint:css prettier:check"
+        "lint:ci": "run-p lint:ruby lint:js lint:css prettier:check"
       },
     EOS
   end
@@ -416,4 +416,3 @@ after_bundle do
   generate_rubocop_todo
   initial_lint_fixes
 end
-

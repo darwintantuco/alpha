@@ -16,15 +16,15 @@ teardown() {
   fi
 }
 
-@test 'Usage' {
+@test 'Basic Usage' {
   # exit 0
   rails new appname \
-    --skip-spring \
-    --database=postgresql \
     --skip-test \
     --skip-turbolinks \
     --skip-coffee \
-    -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
+    -m "https://raw.githubusercontent.com/darwintantuco/alpha/$current_branch/template.rb"
+
+  cd appname
 
   # webpacker setup
   assert [ -e "$WORKSPACE/appname/app/javascript/packs/application.js" ]
@@ -33,19 +33,6 @@ teardown() {
   run bash -c "cat $WORKSPACE/appname/package.json | grep sanitize"
   assert_success
 
-  cd appname
-
-  # rspec passes
-  run rspec
-  assert_success
-
-  # linter works
-  run yarn run lint:ci
-  assert_success
-
-  # jest works
-  run yarn run test
-  assert_success
 
   # output rails app has no uncommitted changes
   run git status
@@ -56,19 +43,28 @@ teardown() {
 
   # no typescript
   refute [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
+
+  # linter works
+  run yarn run lint:ci
+  assert_success
+
+  # jest works
+  run yarn run test
+  assert_success
+
+  # rspec passes
+  run bundle exec rails db:prepare RAILS_ENV=test
+  run bundle exec rspec
+  assert_success
 }
 
 @test 'Custom flags' {
   rails new appname \
-    --skip-spring \
-    --typescript \
     --asdf \
-    --webpack \
-    -m https://raw.githubusercontent.com/darwintantuco/alpha/master/template.rb
+    --typescript \
+    -m "https://raw.githubusercontent.com/darwintantuco/alpha/$current_branch/template.rb"
 
-  # rspec passes
-  run rspec
-  assert_success
+  cd appname
 
   # output rails app has no uncommitted changes
   run git status
@@ -79,4 +75,17 @@ teardown() {
 
   # typescript
   assert [ -e "$WORKSPACE/appname/app/javascript/react/components/Greeter.tsx" ]
+
+  # linter works
+  run yarn run lint:ci
+  assert_success
+
+  # jest works
+  run yarn run test
+  assert_success
+
+  # rspec passes
+  run bundle exec rails db:prepare RAILS_ENV=test
+  run bundle exec rspec
+  assert_success
 }

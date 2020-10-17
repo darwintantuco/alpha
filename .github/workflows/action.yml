@@ -2,6 +2,8 @@ name: Ruby CI
 
 on:
   push:
+    branches:
+      - master
   pull_request:
   schedule:
     # every week at 00:00 Friday
@@ -11,10 +13,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1.40.0
         with:
           ruby-version: 2.7
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${{ github.head_ref }})"
+        id: extract_branch
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -34,8 +41,11 @@ jobs:
       - name: Install rails
         run: gem install rails -v 6.0.2
 
+      - name: Install bundler
+        run: gem install bundler
+
       - name: Setup git
         run: (git config --global user.email "you@example.com" && git config --global user.name "Your Name")
 
       - name: Run tests
-        run: yarn test
+        run: current_branch=${{ steps.extract_branch.outputs.branch }} ./node_modules/.bin/bats --tap ./tests/*.bats
