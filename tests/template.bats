@@ -19,6 +19,7 @@ teardown() {
 @test 'Usage' {
   # exit 0
   rails new appname \
+    --skip-spring \
     --database=postgresql \
     --skip-test \
     --skip-turbolinks \
@@ -59,6 +60,7 @@ teardown() {
 
 @test 'Custom flags' {
   rails new appname \
+    --skip-spring \
     --typescript \
     --asdf \
     --webpack \
