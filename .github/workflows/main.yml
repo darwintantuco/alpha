@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
   schedule:
     # every week at 00:00 Friday
     - cron: '0 0 * * 5'
@@ -17,11 +16,6 @@ jobs:
       - uses: ruby/setup-ruby@v1.40.0
         with:
           ruby-version: 2.7
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${{ github.head_ref }})"
-        id: extract_branch
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -48,4 +42,4 @@ jobs:
         run: (git config --global user.email "you@example.com" && git config --global user.name "Your Name")
 
       - name: Run tests
-        run: current_branch=${{ steps.extract_branch.outputs.branch }} ./node_modules/.bin/bats --tap ./tests/*.bats
+        run: current_branch=master ./node_modules/.bin/bats --tap ./tests/*.bats
