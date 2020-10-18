@@ -1,0 +1,45 @@
+name: Ruby CI
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ruby/setup-ruby@v1.40.0
+        with:
+          ruby-version: 2.7
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${{ github.head_ref }})"
+        id: extract_branch
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn --frozen--lockfile
+
+      - name: Install rails
+        run: gem install rails -v 6.0.2
+
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Setup git
+        run: (git config --global user.email "you@example.com" && git config --global user.name "Your Name")
+
+      - name: Run tests
+        run: current_branch=${{ steps.extract_branch.outputs.branch }} ./node_modules/.bin/bats --tap ./tests/*.bats
